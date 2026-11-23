@@ -2,19 +2,32 @@ import {
   BarChart3,
   Database,
   LineChart,
-  ScanSearch,
   Sparkles,
   Table2,
 } from 'lucide-react';
 import { SectionHeading, useReveal } from './Section';
 
 const skillItems = [
-  { label: 'Microsoft Excel', icon: Table2 },
-  { label: 'Power BI', icon: BarChart3 },
-  { label: 'Data Interpretation', icon: ScanSearch },
-  { label: 'Data Cleaning', icon: Sparkles },
-  { label: 'Data Analysis', icon: Database },
-  { label: 'Data Visualization', icon: LineChart },
+  {
+    label: 'Microsoft Excel',
+    icon: Table2,
+  },
+  {
+    label: 'Power BI',
+    icon: BarChart3,
+  },
+  {
+    label: 'Data Cleaning',
+    icon: Sparkles,
+  },
+  {
+    label: 'Data Analysis',
+    icon: Database,
+  },
+  {
+    label: 'Data Visualization',
+    icon: LineChart,
+  },
 ] as const;
 
 export default function Skills() {
@@ -25,27 +38,34 @@ export default function Skills() {
       <div ref={ref}>
         <div
           className={`transition-all duration-700 ease-out ${
-            visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+            visible
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-6 opacity-0'
           }`}
         >
-          <SectionHeading eyebrow="Skills" title="Tools and strengths" />
+          <SectionHeading
+            eyebrow="Skills"
+            title="Tools and strengths"
+          />
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5">
-            {skillItems.map(({ label, icon: Icon }, i) => (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {skillItems.map(({ label, icon: Icon }, index) => (
               <div
                 key={label}
-                style={{ transitionDelay: `${i * 60}ms` }}
-                className={`group flex items-center gap-3.5 rounded-2xl border border-ink-line bg-ink-card/60 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-card sm:p-5 ${
+                style={{
+                  transitionDelay: `${index * 100}ms`,
+                }}
+                className={`group flex min-h-[130px] flex-col justify-between rounded-2xl border border-ink-line bg-ink-card/60 p-5 transition-all duration-700 ease-out hover:-translate-y-1 hover:border-accent/40 hover:bg-ink-card/80 hover:shadow-card ${
                   visible
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-4 opacity-0'
+                    ? 'translate-y-0 scale-100 opacity-100'
+                    : 'translate-y-8 scale-[0.97] opacity-0'
                 }`}
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-ink-deep">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-ink-deep">
                   <Icon size={20} strokeWidth={1.7} />
                 </span>
 
-                <span className="text-sm font-semibold text-text sm:text-[0.95rem]">
+                <span className="mt-6 text-sm font-semibold leading-snug text-text">
                   {label}
                 </span>
               </div>
