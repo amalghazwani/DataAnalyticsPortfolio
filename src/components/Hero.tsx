@@ -18,53 +18,52 @@ function AnalyticsVisual({
   translations: HeroTranslations;
 }) {
   return (
-    <div className="relative mx-auto w-full max-w-[620px]">
-      <div className="relative aspect-[1.15/1] w-full">
+    <div className="relative mx-auto w-full max-w-[500px] sm:max-w-[560px] lg:max-w-[620px]">
+      <div className="relative aspect-[1.35/1] w-full">
 
-        {/* Soft central glow */}
-        <div className="absolute left-1/2 top-[48%] h-[48%] w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.055] blur-3xl" />
+        {/* Soft glow */}
+        <div className="absolute left-1/2 top-1/2 h-[45%] w-[50%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.045] blur-3xl" />
 
         {/* Minimal data points */}
-        <span className="absolute left-[12%] top-[31%] h-2 w-2 rounded-full bg-accent-light/80 shadow-[0_0_14px_rgba(92,163,178,0.45)] animate-[pulse_6s_ease-in-out_infinite]" />
+        <span className="absolute left-[12%] top-[34%] h-2 w-2 rounded-full bg-accent-light/75 shadow-[0_0_14px_rgba(92,163,178,0.45)]" />
 
-        <span className="absolute right-[13%] bottom-[24%] h-2 w-2 rounded-full bg-accent-light/80 shadow-[0_0_14px_rgba(92,163,178,0.45)] animate-[pulse_7s_ease-in-out_infinite]" />
+        <span className="absolute right-[13%] bottom-[27%] h-2 w-2 rounded-full bg-accent-light/75 shadow-[0_0_14px_rgba(92,163,178,0.45)]" />
 
-        {/* Main analytics area */}
-        <div className="absolute bottom-[13%] left-[9%] right-[9%] top-[18%]">
+        {/* Chart area */}
+        <div className="absolute bottom-[13%] left-[7%] right-[7%] top-[17%]">
 
           {/* Very subtle grid */}
-          <div className="absolute inset-0 rounded-[2.5rem] border border-accent/[0.07] bg-accent/[0.012]" />
+          <div className="absolute inset-0 rounded-[2rem] border border-accent/[0.055]" />
 
-          <div className="absolute left-[7%] right-[7%] top-[25%] h-px bg-accent/[0.055]" />
-          <div className="absolute left-[7%] right-[7%] top-[50%] h-px bg-accent/[0.055]" />
-          <div className="absolute left-[7%] right-[7%] top-[75%] h-px bg-accent/[0.055]" />
+          <div className="absolute left-[7%] right-[7%] top-[30%] h-px bg-accent/[0.045]" />
+          <div className="absolute left-[7%] right-[7%] top-[58%] h-px bg-accent/[0.045]" />
 
-          {/* Chart bars */}
-          <div className="absolute bottom-[8%] left-[9%] right-[9%] flex h-[57%] items-end justify-between gap-3 sm:gap-5">
+          {/* Bars */}
+          <div className="absolute bottom-[8%] left-[10%] right-[10%] flex h-[52%] items-end justify-between gap-3 sm:gap-5">
 
             <div
-              className="w-full max-w-[48px] rounded-t-lg border border-accent/25 bg-gradient-to-t from-accent/[0.015] to-accent/[0.12] animate-[pulse_8s_ease-in-out_infinite]"
+              className="w-full max-w-[42px] rounded-t-md border border-accent/25 bg-accent/[0.045]"
               style={{ height: '38%' }}
             />
 
             <div
-              className="w-full max-w-[48px] rounded-t-lg border border-accent/30 bg-gradient-to-t from-accent/[0.015] to-accent/[0.16] animate-[pulse_9s_ease-in-out_infinite]"
+              className="w-full max-w-[42px] rounded-t-md border border-accent/30 bg-accent/[0.07]"
               style={{ height: '58%' }}
             />
 
             <div
-              className="w-full max-w-[48px] rounded-t-lg border border-accent/25 bg-gradient-to-t from-accent/[0.015] to-accent/[0.13] animate-[pulse_8.5s_ease-in-out_infinite]"
-              style={{ height: '47%' }}
+              className="w-full max-w-[42px] rounded-t-md border border-accent/25 bg-accent/[0.05]"
+              style={{ height: '46%' }}
             />
 
             <div
-              className="w-full max-w-[48px] rounded-t-lg border border-accent/40 bg-gradient-to-t from-accent/[0.02] to-accent/[0.22] shadow-[0_0_22px_rgba(92,163,178,0.06)] animate-[pulse_10s_ease-in-out_infinite]"
-              style={{ height: '78%' }}
+              className="w-full max-w-[42px] rounded-t-md border border-accent/40 bg-accent/[0.10]"
+              style={{ height: '76%' }}
             />
 
             <div
-              className="w-full max-w-[48px] rounded-t-lg border border-accent/30 bg-gradient-to-t from-accent/[0.015] to-accent/[0.15] animate-[pulse_9.5s_ease-in-out_infinite]"
-              style={{ height: '60%' }}
+              className="w-full max-w-[42px] rounded-t-md border border-accent/30 bg-accent/[0.06]"
+              style={{ height: '59%' }}
             />
           </div>
 
@@ -79,44 +78,32 @@ function AnalyticsVisual({
             <path
               d="
                 M 35 278
-                C 90 270, 118 264, 158 245
-                C 205 223, 225 166, 275 174
-                C 323 182, 337 225, 382 214
-                C 428 203, 432 139, 474 148
-                C 516 157, 532 128, 585 72
+                C 90 270, 125 265, 165 242
+                C 210 216, 230 164, 275 173
+                C 320 182, 340 222, 382 211
+                C 425 200, 438 145, 475 151
+                C 515 157, 540 125, 585 72
               "
-              stroke="rgba(154, 207, 218, 0.92)"
+              stroke="rgba(154, 207, 218, 0.9)"
               strokeWidth="4"
-              strokeLinecap="round"
-            />
-
-            {/* Soft highlight behind the final section */}
-            <path
-              d="
-                M 432 203
-                C 470 192, 470 146, 505 151
-                C 540 156, 552 120, 585 72
-              "
-              stroke="rgba(92, 163, 178, 0.18)"
-              strokeWidth="10"
               strokeLinecap="round"
             />
           </svg>
 
           {/* Insight card */}
-          <div className="absolute right-[3%] top-[-4%] rounded-2xl border border-accent/20 bg-ink-card/90 px-3.5 py-3 shadow-card backdrop-blur-md sm:px-4 sm:py-3.5">
-            <div className="flex items-center gap-3">
+          <div className="absolute right-[3%] top-[0%] rounded-2xl border border-accent/15 bg-ink-card/85 px-3 py-2.5 shadow-card backdrop-blur-md sm:px-4 sm:py-3">
+            <div className="flex items-center gap-2.5">
 
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                <BarChart3 size={15} strokeWidth={1.8} />
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                <BarChart3 size={14} strokeWidth={1.8} />
               </span>
 
               <div>
-                <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-text-faint">
+                <p className="text-[8px] font-semibold uppercase tracking-[0.16em] text-text-faint">
                   {translations.insight}
                 </p>
 
-                <p className="mt-1 text-[11px] font-semibold text-accent-light sm:text-xs">
+                <p className="mt-0.5 text-[10px] font-semibold text-accent-light sm:text-xs">
                   {translations.decisions}
                 </p>
               </div>
@@ -124,14 +111,14 @@ function AnalyticsVisual({
             </div>
           </div>
 
-          {/* Small connection point */}
-          <span className="absolute right-[4.5%] top-[25%] h-2 w-2 rounded-full bg-accent-light/80 shadow-[0_0_14px_rgba(92,163,178,0.5)] animate-[pulse_6s_ease-in-out_infinite]" />
+          {/* Small point near the end of the line */}
+          <span className="absolute right-[4%] top-[28%] h-2 w-2 rounded-full bg-accent-light/75 shadow-[0_0_12px_rgba(92,163,178,0.45)]" />
 
         </div>
 
         {/* Bottom label */}
-        <div className="absolute bottom-[4%] left-[8%] rounded-full border border-ink-line/80 bg-ink-card/70 px-3.5 py-1.5 backdrop-blur-md sm:px-4">
-          <span className="text-[9px] font-semibold uppercase tracking-[0.17em] text-text-faint sm:text-[10px]">
+        <div className="absolute bottom-[2%] left-[7%] rounded-full border border-ink-line/70 bg-ink-card/60 px-3 py-1.5 backdrop-blur-md sm:px-4">
+          <span className="text-[8px] font-semibold uppercase tracking-[0.16em] text-text-faint sm:text-[9px]">
             {translations.visualLabel}
           </span>
         </div>
@@ -164,7 +151,7 @@ export default function Hero({
 
       <div
         ref={ref}
-        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-8 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-5 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
       >
 
         {/* Visual */}
