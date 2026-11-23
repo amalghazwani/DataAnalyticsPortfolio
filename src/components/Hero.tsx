@@ -22,16 +22,16 @@ function AnalyticsVisual({
       <div className="relative aspect-[1.15/1] w-full">
 
         {/* Ambient glow */}
-        <div className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl animate-[pulse_7s_ease-in-out_infinite]" />
 
         {/* Decorative data points */}
-        <span className="absolute left-[8%] top-[27%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)]" />
+        <span className="absolute left-[8%] top-[27%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_5s_ease-in-out_infinite]" />
 
-        <span className="absolute right-[9%] top-[19%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)]" />
+        <span className="absolute right-[9%] top-[19%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_6s_ease-in-out_infinite]" />
 
-        <span className="absolute left-[10%] bottom-[23%] h-2 w-2 rounded-full bg-accent/90 shadow-[0_0_16px_rgba(92,163,178,0.5)]" />
+        <span className="absolute left-[10%] bottom-[23%] h-2 w-2 rounded-full bg-accent/90 shadow-[0_0_16px_rgba(92,163,178,0.5)] animate-[pulse_5.5s_ease-in-out_infinite]" />
 
-        <span className="absolute right-[17%] bottom-[10%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.5)]" />
+        <span className="absolute right-[17%] bottom-[10%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.5)] animate-[pulse_6.5s_ease-in-out_infinite]" />
 
         {/* Soft grid */}
         <div className="absolute bottom-[14%] left-[10%] right-[10%] top-[18%] rounded-[2rem] border border-accent/[0.08] bg-accent/[0.015]" />
@@ -42,15 +42,15 @@ function AnalyticsVisual({
 
         {/* Chart bars */}
         <div className="absolute bottom-[18%] left-[17%] right-[17%] flex h-[48%] items-end justify-center gap-3 sm:gap-5">
-          <div className="h-[42%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11" />
+          <div className="h-[42%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11 animate-[pulse_7s_ease-in-out_infinite]" />
 
-          <div className="h-[63%] w-8 rounded-t-md border border-accent/45 bg-gradient-to-t from-accent/[0.03] to-accent/25 sm:w-11" />
+          <div className="h-[63%] w-8 rounded-t-md border border-accent/45 bg-gradient-to-t from-accent/[0.03] to-accent/25 sm:w-11 animate-[pulse_8s_ease-in-out_infinite]" />
 
-          <div className="h-[51%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11" />
+          <div className="h-[51%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11 animate-[pulse_7.5s_ease-in-out_infinite]" />
 
-          <div className="h-[82%] w-8 rounded-t-md border border-accent/60 bg-gradient-to-t from-accent/[0.04] to-accent/30 shadow-[0_0_24px_rgba(92,163,178,0.08)] sm:w-11" />
+          <div className="h-[82%] w-8 rounded-t-md border border-accent/60 bg-gradient-to-t from-accent/[0.04] to-accent/30 shadow-[0_0_24px_rgba(92,163,178,0.08)] sm:w-11 animate-[pulse_8.5s_ease-in-out_infinite]" />
 
-          <div className="h-[61%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/22 sm:w-11" />
+          <div className="h-[61%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/22 sm:w-11 animate-[pulse_7.8s_ease-in-out_infinite]" />
         </div>
 
         {/* Growth line */}
@@ -85,11 +85,12 @@ function AnalyticsVisual({
             cy="70"
             r="14"
             fill="rgba(92, 163, 178, 0.08)"
+            className="animate-[pulse_5s_ease-in-out_infinite]"
           />
         </svg>
 
         {/* Floating insight card */}
-        <div className="absolute right-[5%] top-[10%] rounded-2xl border border-accent/20 bg-ink-card/75 px-3 py-2.5 shadow-card backdrop-blur-md sm:px-4 sm:py-3">
+        <div className="absolute right-[5%] top-[10%] rounded-2xl border border-accent/20 bg-ink-card/75 px-3 py-2.5 shadow-card backdrop-blur-md sm:px-4 sm:py-3 animate-[pulse_8s_ease-in-out_infinite]">
           <div className="flex items-center gap-2.5">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <BarChart3 size={14} />
@@ -141,11 +142,22 @@ export default function Hero({
 
       <div
         ref={ref}
-        className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-8 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
       >
+        {/* Visual */}
+        <div
+          className={`order-1 w-full transition-all delay-150 duration-1000 ease-out lg:order-2 ${
+            visible
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-8 opacity-0'
+          }`}
+        >
+          <AnalyticsVisual translations={translations} />
+        </div>
+
         {/* Text */}
         <div
-          className={`order-1 transition-all duration-1000 ease-out ${
+          className={`order-2 w-full transition-all duration-1000 ease-out lg:order-1 ${
             visible
               ? 'translate-y-0 opacity-100'
               : 'translate-y-8 opacity-0'
@@ -161,7 +173,7 @@ export default function Hero({
           </div>
 
           {/* Name */}
-          <h1 className="max-w-[700px] font-display text-[3.2rem] font-semibold leading-[0.94] tracking-[-0.045em] text-text sm:text-6xl md:text-7xl lg:text-[4.8rem] xl:text-[5.5rem]">
+          <h1 className="max-w-[700px] whitespace-nowrap font-display text-[clamp(2.6rem,8vw,4.8rem)] font-semibold leading-[0.94] tracking-[-0.045em] text-text sm:text-6xl md:text-7xl lg:text-[4.8rem] xl:text-[5.5rem]">
             {translations.name}
           </h1>
 
@@ -177,6 +189,7 @@ export default function Hero({
               className="inline-flex items-center justify-center gap-3 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-ink-deep transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-light hover:shadow-card sm:px-7 sm:py-4 sm:text-base"
             >
               {translations.projects}
+
               <ArrowRight
                 size={18}
                 className="transition-transform duration-300 rtl:rotate-180"
@@ -190,17 +203,6 @@ export default function Hero({
               {translations.contact}
             </a>
           </div>
-        </div>
-
-        {/* Visual */}
-        <div
-          className={`order-2 transition-all delay-150 duration-1000 ease-out ${
-            visible
-              ? 'translate-y-0 opacity-100'
-              : 'translate-y-8 opacity-0'
-          }`}
-        >
-          <AnalyticsVisual translations={translations} />
         </div>
       </div>
     </section>
