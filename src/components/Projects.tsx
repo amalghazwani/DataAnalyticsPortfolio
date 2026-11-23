@@ -6,7 +6,7 @@ import {
   Table2,
   X,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { projects, type Project } from '../data/content';
 import { SectionHeading, useReveal } from './Section';
 
@@ -58,6 +58,23 @@ function ProjectCard({
   const imageSrc = project.image
     ? project.image.replace(/^\/+/, '')
     : undefined;
+
+  // Close image modal with Escape
+  useEffect(() => {
+    if (!isImageOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsImageOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isImageOpen]);
 
   return (
     <>
@@ -137,11 +154,16 @@ function ProjectCard({
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-sm sm:py-8"
           onClick={() => setIsImageOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${project.name} preview`}
         >
+          {/* Clicking this area does NOT close the modal */}
           <div
             className="relative flex h-[90vh] w-full max-w-[94vw] items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
+            {/* Optional close button */}
             <button
               type="button"
               onClick={() => setIsImageOpen(false)}
