@@ -42,12 +42,12 @@ export default function Hero({
               : 'translate-y-6 opacity-0'
           }`}
         >
-          <h1 className="font-display text-[clamp(3.2rem,11vw,7.5rem)] font-semibold leading-[0.88] tracking-[-0.055em] text-text">
+          <h1 className="font-display text-[clamp(2.7rem,9vw,6.2rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-text">
             <span className="block">
               {translations.name}
             </span>
 
-            <span className="mt-3 block bg-gradient-to-r from-[#77747A] via-[#FFFFFF] to-[#A7A4A8] bg-clip-text text-transparent sm:mt-4">
+            <span className="mt-2.5 block bg-gradient-to-r from-[#77747A] via-[#FFFFFF] to-[#A7A4A8] bg-clip-text text-transparent sm:mt-3">
               {translations.title}
             </span>
           </h1>
@@ -55,7 +55,7 @@ export default function Hero({
 
         {/* Tagline */}
         <p
-          className={`mt-7 max-w-2xl text-base leading-relaxed text-text-muted transition-all delay-100 duration-900 ease-out sm:mt-8 sm:text-lg ${
+          className={`mt-6 max-w-2xl text-[15px] leading-relaxed text-text-muted transition-all delay-100 duration-900 ease-out sm:mt-7 sm:text-base ${
             visible
               ? 'translate-y-0 opacity-100'
               : 'translate-y-6 opacity-0'
@@ -66,7 +66,7 @@ export default function Hero({
 
         {/* Buttons */}
         <div
-          className={`mt-8 flex flex-wrap items-center justify-center gap-3 transition-all delay-200 duration-900 ease-out sm:mt-9 ${
+          className={`mt-7 flex flex-wrap items-center justify-center gap-3 transition-all delay-200 duration-900 ease-out sm:mt-8 ${
             visible
               ? 'translate-y-0 opacity-100'
               : 'translate-y-6 opacity-0'
