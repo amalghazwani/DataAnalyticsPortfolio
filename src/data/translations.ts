@@ -16,9 +16,6 @@ export type TranslationSet = {
     tagline: string;
     projects: string;
     contact: string;
-    insight: string;
-    decisions: string;
-    visualLabel: string;
   };
 
   about: {
@@ -88,12 +85,10 @@ export const translations: Record<Language, TranslationSet> = {
     hero: {
       name: 'Amal Ghazwani',
       title: 'Data Analyst',
-      tagline: 'Turning data into clear insights and decision-ready stories.',
+      tagline:
+        'Transforming data into clear insights that support better decisions.',
       projects: 'View Projects',
       contact: 'Get in Touch',
-      insight: 'Insight',
-      decisions: 'Data → Decisions',
-      visualLabel: 'Analyze · Visualize · Insight',
     },
 
     about: {
@@ -197,12 +192,10 @@ export const translations: Record<Language, TranslationSet> = {
     hero: {
       name: 'أمل غزواني',
       title: 'محللة بيانات',
-      tagline: 'أحوّل البيانات إلى رؤى واضحة وقصص تساعد على اتخاذ القرار.',
+      tagline:
+        'أحوّل البيانات إلى رؤى واضحة تساعد على اتخاذ قرارات أفضل.',
       projects: 'استعرض المشاريع',
       contact: 'تواصل معي',
-      insight: 'رؤية',
-      decisions: 'البيانات ← القرارات',
-      visualLabel: 'تحليل · تصور · استنتاج',
     },
 
     about: {
