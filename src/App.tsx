@@ -8,6 +8,7 @@ import Process from './components/Process';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Intro from './components/Intro';
 import { translations, type Language } from './data/translations';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-ink">
+      <Intro />
       <BackgroundFX />
 
       <div className="relative z-10">
