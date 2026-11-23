@@ -55,10 +55,10 @@ function ProjectCard({
 
   const hasStats = Boolean(project.stats?.length);
 
-  // Build the correct image path for both local development
-  // and GitHub Pages deployment.
+  // Keep the image path relative to the current site.
+  // This works both locally and on GitHub Pages.
   const imageSrc = project.image
-    ? `${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, '')}`
+    ? project.image.replace(/^\/+/, '')
     : undefined;
 
   return (
