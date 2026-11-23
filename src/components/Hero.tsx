@@ -21,85 +21,121 @@ function AnalyticsVisual({
     <div className="relative mx-auto w-full max-w-[620px]">
       <div className="relative aspect-[1.15/1] w-full">
 
-        {/* Ambient glow */}
-        <div className="absolute left-1/2 top-1/2 h-[45%] w-[45%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl animate-[pulse_7s_ease-in-out_infinite]" />
+        {/* Soft central glow */}
+        <div className="absolute left-1/2 top-[48%] h-[48%] w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.055] blur-3xl" />
 
-        {/* Decorative data points */}
-        <span className="absolute left-[8%] top-[27%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_5s_ease-in-out_infinite]" />
+        {/* Minimal data points */}
+        <span className="absolute left-[12%] top-[31%] h-2 w-2 rounded-full bg-accent-light/80 shadow-[0_0_14px_rgba(92,163,178,0.45)] animate-[pulse_6s_ease-in-out_infinite]" />
 
-        {/* Moved point — positioned away from the insight card */}
-        <span className="absolute right-[14%] top-[42%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_6s_ease-in-out_infinite]" />
+        <span className="absolute right-[13%] bottom-[24%] h-2 w-2 rounded-full bg-accent-light/80 shadow-[0_0_14px_rgba(92,163,178,0.45)] animate-[pulse_7s_ease-in-out_infinite]" />
 
-        <span className="absolute left-[10%] bottom-[23%] h-2 w-2 rounded-full bg-accent/90 shadow-[0_0_16px_rgba(92,163,178,0.5)] animate-[pulse_5.5s_ease-in-out_infinite]" />
+        {/* Main analytics area */}
+        <div className="absolute bottom-[13%] left-[9%] right-[9%] top-[18%]">
 
-        <span className="absolute right-[17%] bottom-[10%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.5)] animate-[pulse_6.5s_ease-in-out_infinite]" />
+          {/* Very subtle grid */}
+          <div className="absolute inset-0 rounded-[2.5rem] border border-accent/[0.07] bg-accent/[0.012]" />
 
-        {/* Soft grid */}
-        <div className="absolute bottom-[14%] left-[10%] right-[10%] top-[18%] rounded-[2rem] border border-accent/[0.08] bg-accent/[0.015]" />
+          <div className="absolute left-[7%] right-[7%] top-[25%] h-px bg-accent/[0.055]" />
+          <div className="absolute left-[7%] right-[7%] top-[50%] h-px bg-accent/[0.055]" />
+          <div className="absolute left-[7%] right-[7%] top-[75%] h-px bg-accent/[0.055]" />
 
-        <div className="absolute left-[15%] right-[15%] top-[27%] h-px bg-accent/[0.07]" />
-        <div className="absolute left-[15%] right-[15%] top-[46%] h-px bg-accent/[0.07]" />
-        <div className="absolute left-[15%] right-[15%] top-[65%] h-px bg-accent/[0.07]" />
+          {/* Chart bars */}
+          <div className="absolute bottom-[8%] left-[9%] right-[9%] flex h-[57%] items-end justify-between gap-3 sm:gap-5">
 
-        {/* Chart bars */}
-        <div className="absolute bottom-[18%] left-[17%] right-[17%] flex h-[48%] items-end justify-center gap-3 sm:gap-5">
-          <div className="h-[42%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11 animate-[pulse_7s_ease-in-out_infinite]" />
+            <div
+              className="w-full max-w-[48px] rounded-t-lg border border-accent/25 bg-gradient-to-t from-accent/[0.015] to-accent/[0.12] animate-[pulse_8s_ease-in-out_infinite]"
+              style={{ height: '38%' }}
+            />
 
-          <div className="h-[63%] w-8 rounded-t-md border border-accent/45 bg-gradient-to-t from-accent/[0.03] to-accent/25 sm:w-11 animate-[pulse_8s_ease-in-out_infinite]" />
+            <div
+              className="w-full max-w-[48px] rounded-t-lg border border-accent/30 bg-gradient-to-t from-accent/[0.015] to-accent/[0.16] animate-[pulse_9s_ease-in-out_infinite]"
+              style={{ height: '58%' }}
+            />
 
-          <div className="h-[51%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11 animate-[pulse_7.5s_ease-in-out_infinite]" />
+            <div
+              className="w-full max-w-[48px] rounded-t-lg border border-accent/25 bg-gradient-to-t from-accent/[0.015] to-accent/[0.13] animate-[pulse_8.5s_ease-in-out_infinite]"
+              style={{ height: '47%' }}
+            />
 
-          <div className="h-[82%] w-8 rounded-t-md border border-accent/60 bg-gradient-to-t from-accent/[0.04] to-accent/30 shadow-[0_0_24px_rgba(92,163,178,0.08)] sm:w-11 animate-[pulse_8.5s_ease-in-out_infinite]" />
+            <div
+              className="w-full max-w-[48px] rounded-t-lg border border-accent/40 bg-gradient-to-t from-accent/[0.02] to-accent/[0.22] shadow-[0_0_22px_rgba(92,163,178,0.06)] animate-[pulse_10s_ease-in-out_infinite]"
+              style={{ height: '78%' }}
+            />
 
-          <div className="h-[61%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/22 sm:w-11 animate-[pulse_7.8s_ease-in-out_infinite]" />
-        </div>
+            <div
+              className="w-full max-w-[48px] rounded-t-lg border border-accent/30 bg-gradient-to-t from-accent/[0.015] to-accent/[0.15] animate-[pulse_9.5s_ease-in-out_infinite]"
+              style={{ height: '60%' }}
+            />
+          </div>
 
-        {/* Growth line */}
-        <svg
-          viewBox="0 0 620 360"
-          className="absolute inset-0 h-full w-full"
-          fill="none"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M105 258
-               C150 246 176 254 215 231
-               C255 207 275 165 320 174
-               C365 183 384 212 421 191
-               C458 170 462 131 503 141
-               C540 150 551 112 585 70"
-            stroke="rgba(154, 207, 218, 0.95)"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-        </svg>
+          {/* Growth line */}
+          <svg
+            viewBox="0 0 620 360"
+            className="pointer-events-none absolute inset-0 h-full w-full"
+            fill="none"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="
+                M 35 278
+                C 90 270, 118 264, 158 245
+                C 205 223, 225 166, 275 174
+                C 323 182, 337 225, 382 214
+                C 428 203, 432 139, 474 148
+                C 516 157, 532 128, 585 72
+              "
+              stroke="rgba(154, 207, 218, 0.92)"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
 
-        {/* Floating insight card */}
-        <div className="absolute right-[5%] top-[10%] rounded-2xl border border-accent/20 bg-ink-card/75 px-3 py-2.5 shadow-card backdrop-blur-md sm:px-4 sm:py-3 animate-[pulse_8s_ease-in-out_infinite]">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <BarChart3 size={14} />
-            </span>
+            {/* Soft highlight behind the final section */}
+            <path
+              d="
+                M 432 203
+                C 470 192, 470 146, 505 151
+                C 540 156, 552 120, 585 72
+              "
+              stroke="rgba(92, 163, 178, 0.18)"
+              strokeWidth="10"
+              strokeLinecap="round"
+            />
+          </svg>
 
-            <div>
-              <p className="text-[9px] font-semibold uppercase tracking-wider text-text-faint">
-                {translations.insight}
-              </p>
+          {/* Insight card */}
+          <div className="absolute right-[3%] top-[-4%] rounded-2xl border border-accent/20 bg-ink-card/90 px-3.5 py-3 shadow-card backdrop-blur-md sm:px-4 sm:py-3.5">
+            <div className="flex items-center gap-3">
 
-              <p className="mt-0.5 text-[11px] font-semibold text-accent-light sm:text-xs">
-                {translations.decisions}
-              </p>
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                <BarChart3 size={15} strokeWidth={1.8} />
+              </span>
+
+              <div>
+                <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-text-faint">
+                  {translations.insight}
+                </p>
+
+                <p className="mt-1 text-[11px] font-semibold text-accent-light sm:text-xs">
+                  {translations.decisions}
+                </p>
+              </div>
+
             </div>
           </div>
+
+          {/* Small connection point */}
+          <span className="absolute right-[4.5%] top-[25%] h-2 w-2 rounded-full bg-accent-light/80 shadow-[0_0_14px_rgba(92,163,178,0.5)] animate-[pulse_6s_ease-in-out_infinite]" />
+
         </div>
 
-        {/* Bottom data label */}
-        <div className="absolute bottom-[6%] left-[7%] rounded-full border border-ink-line bg-ink-card/70 px-3 py-1.5 backdrop-blur-md sm:px-4">
-          <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-text-faint sm:text-[10px]">
+        {/* Bottom label */}
+        <div className="absolute bottom-[4%] left-[8%] rounded-full border border-ink-line/80 bg-ink-card/70 px-3.5 py-1.5 backdrop-blur-md sm:px-4">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.17em] text-text-faint sm:text-[10px]">
             {translations.visualLabel}
           </span>
         </div>
+
       </div>
     </div>
   );
@@ -130,6 +166,7 @@ export default function Hero({
         ref={ref}
         className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-8 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
       >
+
         {/* Visual */}
         <div
           className={`order-1 w-full transition-all delay-150 duration-1000 ease-out lg:order-2 ${
@@ -149,6 +186,7 @@ export default function Hero({
               : 'translate-y-8 opacity-0'
           }`}
         >
+
           {/* Role badge */}
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/[0.06] px-3.5 py-2">
             <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(92,163,178,0.7)]" />
@@ -189,6 +227,7 @@ export default function Hero({
               {translations.contact}
             </a>
           </div>
+
         </div>
       </div>
     </section>
