@@ -55,8 +55,6 @@ function ProjectCard({
 
   const hasStats = Boolean(project.stats?.length);
 
-  // Keep the image path relative to the current site.
-  // This works both locally and on GitHub Pages.
   const imageSrc = project.image
     ? project.image.replace(/^\/+/, '')
     : undefined;
@@ -137,18 +135,18 @@ function ProjectCard({
 
       {isImageOpen && imageSrc && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-8 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-sm sm:py-8"
           onClick={() => setIsImageOpen(false)}
         >
           <div
-            className="relative flex max-h-[90vh] max-w-[94vw] items-center justify-center"
+            className="relative flex h-[90vh] w-full max-w-[94vw] items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setIsImageOpen(false)}
               aria-label="Close project image"
-              className="absolute -right-3 -top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card text-text shadow-card transition-all duration-200 hover:bg-accent hover:text-ink-deep"
+              className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card text-text shadow-card transition-all duration-200 hover:bg-accent hover:text-ink-deep sm:-right-3 sm:-top-3"
             >
               <X size={19} />
             </button>
