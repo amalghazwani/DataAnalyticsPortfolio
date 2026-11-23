@@ -1,32 +1,30 @@
 import { BarChart3, Sparkles, Table2 } from 'lucide-react';
 import { SectionHeading, useReveal } from './Section';
 
-const highlights = [
-  {
-    icon: Sparkles,
-    title: 'Turning raw data into insight',
-    text: 'Cleaning messy, unstructured data and shaping it into something clear and understandable.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Building dashboards',
-    text: 'Designing dashboards that make trends and patterns easy to read at a glance.',
-  },
-  {
-    icon: Table2,
-    title: 'Supporting decisions',
-    text: 'Presenting findings as decision-ready stories that support data-driven choices.',
-  },
-];
+type AboutTranslations = {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  highlights: {
+    title: string;
+    text: string;
+  }[];
+};
 
-export default function About() {
+const highlightIcons = [Sparkles, BarChart3, Table2];
+
+export default function About({
+  translations,
+}: {
+  translations: AboutTranslations;
+}) {
   const { ref, visible } = useReveal<HTMLDivElement>();
 
   return (
     <section id="about" className="section-pad">
       <div ref={ref}>
 
-        {/* ================= ABOUT HEADING ================= */}
+        {/* About Heading */}
         <div
           className={`
             mb-8
@@ -41,60 +39,42 @@ export default function About() {
           `}
         >
           <SectionHeading
-            eyebrow="About"
-            title="I turn numbers into clear stories"
+            eyebrow={translations.eyebrow}
+            title={translations.title}
           />
         </div>
 
-        {/* ================= MAIN CONTENT ================= */}
+        {/* Main Content */}
         <div className="grid gap-10 md:grid-cols-2 md:items-start md:gap-12">
 
-          {/* ================= LEFT SIDE ================= */}
+          {/* Left Side */}
           <div className="max-w-xl">
 
-            {/* TEXT */}
+            {/* Text */}
             <div className="space-y-5 text-base leading-relaxed text-text-muted md:text-lg">
-
-              <p
-                className={`
-                  transition-all
-                  duration-700
-                  ease-out
-                  ${
-                    visible
-                      ? 'translate-y-0 opacity-100'
-                      : 'translate-y-5 opacity-0'
-                  }
-                `}
-                style={{ transitionDelay: '250ms' }}
-              >
-                I enjoy exploring data and finding the story behind the
-                numbers. I’m interested in understanding patterns, uncovering
-                meaningful insights, and presenting information in a way that
-                feels clear and easy to follow.
-              </p>
-
-              <p
-                className={`
-                  transition-all
-                  duration-700
-                  ease-out
-                  ${
-                    visible
-                      ? 'translate-y-0 opacity-100'
-                      : 'translate-y-5 opacity-0'
-                  }
-                `}
-                style={{ transitionDelay: '390ms' }}
-              >
-                I believe good analysis is not only about finding the numbers,
-                but also about understanding what they mean and turning them
-                into something useful. My goal is to make data simpler, clearer,
-                and more meaningful.
-              </p>
+              {translations.paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={`
+                    transition-all
+                    duration-700
+                    ease-out
+                    ${
+                      visible
+                        ? 'translate-y-0 opacity-100'
+                        : 'translate-y-5 opacity-0'
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${250 + index * 140}ms`,
+                  }}
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
 
-            {/* ================= ABSTRACT DATA WAVES ================= */}
+            {/* Abstract Data Waves */}
             <div
               className={`
                 relative
@@ -133,6 +113,7 @@ export default function About() {
                 className="absolute inset-0 h-full w-full overflow-visible"
                 fill="none"
                 preserveAspectRatio="none"
+                aria-hidden="true"
               >
                 {/* Main flowing wave */}
                 <path
@@ -229,69 +210,73 @@ export default function About() {
             </div>
           </div>
 
-          {/* ================= HIGHLIGHT CARDS ================= */}
+          {/* Highlight Cards */}
           <div className="space-y-4">
-            {highlights.map(({ icon: Icon, title, text }, index) => (
-              <div
-                key={title}
-                className={`
-                  group
-                  flex
-                  gap-4
-                  rounded-2xl
-                  border
-                  border-ink-line
-                  bg-ink-card/60
-                  p-5
-                  transition-all
-                  duration-1000
-                  ease-[cubic-bezier(0.16,1,0.3,1)]
-                  hover:-translate-y-1
-                  hover:border-accent/40
-                  hover:shadow-card
-                  ${
-                    visible
-                      ? 'translate-y-0 opacity-100 [clip-path:inset(0_0_0_0)]'
-                      : 'translate-y-4 opacity-0 [clip-path:inset(100%_0_0_0)]'
-                  }
-                `}
-                style={{
-                  transitionDelay: `${420 + index * 180}ms`,
-                }}
-              >
-                <span
-                  className="
-                    mt-0.5
+            {translations.highlights.map((highlight, index) => {
+              const Icon = highlightIcons[index];
+
+              return (
+                <div
+                  key={highlight.title}
+                  className={`
+                    group
                     flex
-                    h-10
-                    w-10
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-xl
-                    bg-accent/15
-                    text-accent
+                    gap-4
+                    rounded-2xl
+                    border
+                    border-ink-line
+                    bg-ink-card/60
+                    p-5
                     transition-all
-                    duration-300
-                    group-hover:bg-accent
-                    group-hover:text-ink-deep
-                    group-hover:shadow-[0_0_20px_rgba(92,163,178,0.25)]
-                  "
+                    duration-1000
+                    ease-[cubic-bezier(0.16,1,0.3,1)]
+                    hover:-translate-y-1
+                    hover:border-accent/40
+                    hover:shadow-card
+                    ${
+                      visible
+                        ? 'translate-y-0 opacity-100 [clip-path:inset(0_0_0_0)]'
+                        : 'translate-y-4 opacity-0 [clip-path:inset(100%_0_0_0)]'
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${420 + index * 180}ms`,
+                  }}
                 >
-                  <Icon size={18} strokeWidth={1.8} />
-                </span>
+                  <span
+                    className="
+                      mt-0.5
+                      flex
+                      h-10
+                      w-10
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      bg-accent/15
+                      text-accent
+                      transition-all
+                      duration-300
+                      group-hover:bg-accent
+                      group-hover:text-ink-deep
+                      group-hover:shadow-[0_0_20px_rgba(92,163,178,0.25)]
+                    "
+                  >
+                    <Icon size={18} strokeWidth={1.8} />
+                  </span>
 
-                <div>
-                  <h3 className="font-sans text-base font-semibold text-text">
-                    {title}
-                  </h3>
+                  <div>
+                    <h3 className="font-sans text-base font-semibold text-text">
+                      {highlight.title}
+                    </h3>
 
-                  <p className="mt-1 text-sm leading-relaxed text-text-muted">
-                    {text}
-                  </p>
+                    <p className="mt-1 text-sm leading-relaxed text-text-muted">
+                      {highlight.text}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
