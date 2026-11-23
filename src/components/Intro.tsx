@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 
 export default function Intro() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(true);\n  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setVisible(false), 1450);
-    return () => window.clearTimeout(timer);
+    const fadeTimer = window.setTimeout(() => setExiting(true), 1150);\n    const removeTimer = window.setTimeout(() => setVisible(false), 1500);
+    return () => {\n      window.clearTimeout(fadeTimer);\n      window.clearTimeout(removeTimer);\n    };
   }, []);
 
   if (!visible) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#0B0507]"
+      className={`fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#0B0507] transition-opacity duration-350 ${exiting ? "opacity-0" : "opacity-100"}`}
       aria-label="Portfolio introduction"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(229,138,175,0.12),transparent_34%),linear-gradient(135deg,#0B0507_0%,#16080E_52%,#0B0507_100%)]" />
