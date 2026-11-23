@@ -75,9 +75,7 @@ export default function Hero({
 
         <div
           aria-hidden="true"
-          className={`mt-10 h-px w-24 bg-accent/50 transition-all delay-300 duration-900 ${
-            visible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
-          }`}
+          className="mt-10 h-1 w-32 rounded-full bg-accent opacity-100 shadow-glow"
         />
       </div>
     </section>
