@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,11 +14,21 @@
     line-height: 1.6;
   }
 
+  html[lang='ar'] body {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+  }
+
   h1,
   h2,
   h3 {
     @apply font-display;
     line-height: 1.2;
+  }
+
+  html[lang='ar'] h1,
+  html[lang='ar'] h2,
+  html[lang='ar'] h3 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
   }
 
   ::selection {
@@ -42,6 +54,7 @@
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
+
   100% {
     transform: translate3d(6%, -4%, 0) scale(1.12);
   }
@@ -51,6 +64,7 @@
   0% {
     transform: translate3d(0, 0, 0) scale(1.05);
   }
+
   100% {
     transform: translate3d(-5%, 5%, 0) scale(1);
   }
