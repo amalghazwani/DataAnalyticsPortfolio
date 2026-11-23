@@ -47,7 +47,7 @@ export default function Hero({
               {translations.name}
             </span>
 
-            <span className="mt-2.5 block bg-gradient-to-r from-[#77747A] via-[#FFFFFF] to-[#A7A4A8] bg-clip-text text-transparent sm:mt-3">
+            <span className="mt-2.5 block text-[2.2rem] bg-gradient-to-r from-[#77747A] via-[#FFFFFF] to-[#A7A4A8] bg-clip-text text-transparent sm:mt-3 sm:text-[3.5rem]">
               {translations.title}
             </span>
           </h1>
