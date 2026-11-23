@@ -16,7 +16,7 @@ export default {
         accent: {
           DEFAULT: '#E58AAF',
           dark: '#C97899',
-          light: '#F2B7CB',
+          light: '#F1A9C5',
           muted: '#B87894',
         },
 
@@ -40,7 +40,7 @@ export default {
           '0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 44px rgba(0, 0, 0, 0.45)',
 
         glow:
-          '0 0 0 1px rgba(229, 138, 175, 0.20), 0 8px 30px rgba(229, 138, 175, 0.14)',
+          '0 0 0 1px rgba(229, 138, 175, 0.20), 0 8px 30px rgba(229, 138, 175, 0.12)',
       },
     },
   },
