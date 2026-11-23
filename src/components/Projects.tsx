@@ -55,6 +55,12 @@ function ProjectCard({
 
   const hasStats = Boolean(project.stats?.length);
 
+  // Build the correct image path for both local development
+  // and GitHub Pages deployment.
+  const imageSrc = project.image
+    ? `${import.meta.env.BASE_URL}${project.image.replace(/^\/+/, '')}`
+    : undefined;
+
   return (
     <>
       <article
@@ -63,7 +69,6 @@ function ProjectCard({
         }}
         className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-line bg-ink-card/70 shadow-card transition-all duration-700 hover:-translate-y-1 hover:border-accent/40 hover:shadow-cardHover"
       >
-        {/* Project header */}
         <div className="flex items-center justify-between gap-4 border-b border-ink-line bg-ink/30 px-6 py-4 sm:px-7">
           <div className="flex flex-wrap gap-2">
             {project.tools.map((tool) => (
@@ -76,7 +81,6 @@ function ProjectCard({
           </span>
         </div>
 
-        {/* Project content */}
         <div className="flex flex-1 flex-col p-6 sm:p-7">
           <div>
             <h3 className="font-display text-2xl font-semibold text-text sm:text-[1.7rem]">
@@ -88,7 +92,6 @@ function ProjectCard({
             </p>
           </div>
 
-          {/* Key metrics */}
           {hasStats && (
             <div className="mt-6">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
@@ -114,12 +117,11 @@ function ProjectCard({
             </div>
           )}
 
-          {/* CTA */}
           <div className="mt-auto pt-7">
             <button
               type="button"
               onClick={() => setIsImageOpen(true)}
-              disabled={!project.image}
+              disabled={!imageSrc}
               className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 text-sm font-semibold text-accent transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-ink-deep hover:shadow-card disabled:cursor-not-allowed disabled:opacity-50"
             >
               {translations.viewCaseStudy}
@@ -133,8 +135,7 @@ function ProjectCard({
         </div>
       </article>
 
-      {/* Image modal */}
-      {isImageOpen && project.image && (
+      {isImageOpen && imageSrc && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-8 backdrop-blur-sm"
           onClick={() => setIsImageOpen(false)}
@@ -153,7 +154,7 @@ function ProjectCard({
             </button>
 
             <img
-              src={project.image}
+              src={imageSrc}
               alt={`${project.name} preview`}
               className="max-h-[85vh] max-w-[94vw] rounded-2xl border border-ink-line object-contain shadow-cardHover"
             />
@@ -213,7 +214,6 @@ export default function Projects({
               title={translations.title}
             />
 
-            {/* Filters */}
             <div className="mb-10 flex flex-wrap items-center gap-2 rounded-full border border-ink-line bg-ink-card/50 p-1.5 md:mb-14">
               <div className="mr-1 flex h-8 w-8 items-center justify-center text-text-faint">
                 <Filter size={15} />
@@ -240,7 +240,6 @@ export default function Projects({
             </div>
           </div>
 
-          {/* Projects */}
           <div className="grid gap-6 md:grid-cols-2">
             {filteredProjects.map((project, index) => (
               <ProjectCard
