@@ -24,7 +24,7 @@ export default function Footer({
       <div className="container-wide px-6 py-10 sm:px-8">
         <div className="flex flex-col items-center gap-5">
 
-          {/* Footer controls */}
+          {/* Footer menu + social links */}
           <div className="flex items-center gap-3">
 
             {/* Navigation menu */}
@@ -34,19 +34,19 @@ export default function Footer({
                 onClick={() => setMenuOpen((open) => !open)}
                 aria-label="Open navigation menu"
                 aria-expanded={menuOpen}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-line text-text-muted transition-all duration-300 hover:border-accent/50 hover:text-accent-light"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card/60 text-text-muted transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
               >
                 {menuOpen ? (
-                  <X size={16} />
+                  <X size={17} />
                 ) : (
-                  <Menu size={16} />
+                  <Menu size={17} />
                 )}
               </button>
 
               {menuOpen && (
-                <div className="absolute bottom-12 left-1/2 z-20 w-48 -translate-x-1/2 rounded-2xl border border-ink-line bg-ink-card/95 p-2 shadow-card backdrop-blur-md">
+                <div className="absolute bottom-12 left-1/2 z-30 w-48 -translate-x-1/2 rounded-2xl border border-ink-line bg-ink-card/95 p-2 shadow-card backdrop-blur-md">
                   <nav>
-                    <ul className="flex flex-col">
+                    <ul className="flex flex-col gap-1">
                       {navLinks.map((link) => (
                         <li key={link.href}>
                           <a
@@ -68,9 +68,9 @@ export default function Footer({
             <a
               href={`mailto:${profile.email}`}
               aria-label="Email"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-line text-text-muted transition-all duration-300 hover:border-accent/50 hover:text-accent-light"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card/60 text-text-muted transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
             >
-              <Mail size={15} />
+              <Mail size={16} />
             </a>
 
             {/* LinkedIn */}
@@ -79,9 +79,9 @@ export default function Footer({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-line text-text-muted transition-all duration-300 hover:border-accent/50 hover:text-accent-light"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card/60 text-text-muted transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
             >
-              <Linkedin size={15} />
+              <Linkedin size={16} />
             </a>
 
             {/* GitHub */}
@@ -90,9 +90,9 @@ export default function Footer({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-line text-text-muted transition-all duration-300 hover:border-accent/50 hover:text-accent-light"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card/60 text-text-muted transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
             >
-              <Github size={15} />
+              <Github size={16} />
             </a>
           </div>
 
