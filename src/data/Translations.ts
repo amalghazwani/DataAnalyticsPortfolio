@@ -1,6 +1,80 @@
 export type Language = 'en' | 'ar';
 
-export const translations = {
+export type TranslationSet = {
+  nav: {
+    home: string;
+    about: string;
+    skills: string;
+    process: string;
+    projects: string;
+    contact: string;
+  };
+
+  hero: {
+    name: string;
+    title: string;
+    tagline: string;
+    projects: string;
+    contact: string;
+    insight: string;
+    decisions: string;
+    visualLabel: string;
+  };
+
+  about: {
+    eyebrow: string;
+    title: string;
+    paragraphs: string[];
+    highlights: {
+      title: string;
+      text: string;
+    }[];
+  };
+
+  skills: {
+    eyebrow: string;
+    title: string;
+  };
+
+  process: {
+    eyebrow: string;
+    title: string;
+    steps: {
+      number: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  projects: {
+    eyebrow: string;
+    title: string;
+    filters: {
+      all: string;
+      excel: string;
+      powerBI: string;
+    };
+    caseStudy: string;
+    keyMetrics: string;
+    viewCaseStudy: string;
+    noProjects: string;
+  };
+
+  contact: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    email: string;
+    linkedin: string;
+    github: string;
+  };
+
+  footer: {
+    copyright: string;
+  };
+};
+
+export const translations: Record<Language, TranslationSet> = {
   en: {
     nav: {
       home: 'Home',
@@ -14,33 +88,33 @@ export const translations = {
     hero: {
       name: 'Amal Ghazwani',
       title: 'Data Analyst',
-      tagline: 'Finding the story hidden within the data.',
-      projects: 'View My Projects',
-      contact: 'Contact Me',
+      tagline: 'Turning data into clear insights and decision-ready stories.',
+      projects: 'View Projects',
+      contact: 'Get in Touch',
+      insight: 'Insight',
+      decisions: 'Data → Decisions',
+      visualLabel: 'Analyze · Visualize · Insight',
     },
 
     about: {
       eyebrow: 'About',
       title: 'I turn numbers into clear stories',
-      paragraph1:
-        'I enjoy working with data to uncover patterns, understand what is happening, and turn findings into clear insights.',
-      paragraph2:
-        'My focus is on building practical analyses and dashboards that make information easier to understand and support better decisions.',
+      paragraphs: [
+        'I enjoy exploring data and finding the story behind the numbers. I’m interested in understanding patterns, uncovering meaningful insights, and presenting information in a way that feels clear and easy to follow.',
+        'I believe good analysis is not only about finding the numbers, but also about understanding what they mean and turning them into something useful. My goal is to make data simpler, clearer, and more meaningful.',
+      ],
       highlights: [
         {
           title: 'Turning raw data into insight',
-          description:
-            'Exploring data to uncover patterns, trends, and meaningful findings.',
+          text: 'Cleaning messy, unstructured data and shaping it into something clear and understandable.',
         },
         {
           title: 'Building dashboards',
-          description:
-            'Creating clear and focused visualizations that make data easier to understand.',
+          text: 'Designing dashboards that make trends and patterns easy to read at a glance.',
         },
         {
           title: 'Supporting decisions',
-          description:
-            'Presenting insights in a practical way that helps connect data with decisions.',
+          text: 'Presenting findings as decision-ready stories that support data-driven choices.',
         },
       ],
     },
@@ -48,13 +122,6 @@ export const translations = {
     skills: {
       eyebrow: 'Skills',
       title: 'Tools and strengths',
-      items: [
-        'Microsoft Excel',
-        'Power BI',
-        'Data Cleaning',
-        'Data Analysis',
-        'Data Visualization',
-      ],
     },
 
     process: {
@@ -91,9 +158,11 @@ export const translations = {
     projects: {
       eyebrow: 'Projects',
       title: 'Selected work',
-      all: 'All',
-      excel: 'Excel',
-      powerBI: 'Power BI',
+      filters: {
+        all: 'All',
+        excel: 'Excel',
+        powerBI: 'Power BI',
+      },
       caseStudy: 'Case Study',
       keyMetrics: 'Key Metrics',
       viewCaseStudy: 'View Case Study',
@@ -102,11 +171,16 @@ export const translations = {
 
     contact: {
       eyebrow: 'Contact',
-      title: "Let's connect",
+      title: 'Let’s connect',
+      description:
+        'Have a project, opportunity, or just want to talk about data? I’d be happy to connect.',
+      email: 'Email',
+      linkedin: 'LinkedIn',
+      github: 'GitHub',
     },
 
     footer: {
-      rights: 'All rights reserved.',
+      copyright: 'All rights reserved.',
     },
   },
 
@@ -115,7 +189,7 @@ export const translations = {
       home: 'الرئيسية',
       about: 'نبذة عني',
       skills: 'المهارات',
-      process: 'كيف أعمل',
+      process: 'طريقة عملي',
       projects: 'المشاريع',
       contact: 'تواصل معي',
     },
@@ -123,70 +197,63 @@ export const translations = {
     hero: {
       name: 'أمل غزواني',
       title: 'محللة بيانات',
-      tagline: 'أبحث عن القصة التي تختبئ داخل البيانات.',
-      projects: 'استعرض مشاريعي',
+      tagline: 'أحوّل البيانات إلى رؤى واضحة وقصص تساعد على اتخاذ القرار.',
+      projects: 'استعرض المشاريع',
       contact: 'تواصل معي',
+      insight: 'رؤية',
+      decisions: 'البيانات ← القرارات',
+      visualLabel: 'تحليل · تصور · استنتاج',
     },
 
     about: {
       eyebrow: 'نبذة عني',
       title: 'أحوّل الأرقام إلى قصص واضحة',
-      paragraph1:
-        'أستمتع بالعمل مع البيانات لاكتشاف الأنماط وفهم ما يحدث وتحويل النتائج إلى رؤى واضحة.',
-      paragraph2:
-        'أركز على بناء تحليلات ولوحات معلومات عملية تجعل المعلومات أسهل للفهم وتدعم اتخاذ قرارات أفضل.',
+      paragraphs: [
+        'أستمتع باستكشاف البيانات والبحث عن القصة الموجودة خلف الأرقام. أهتم بفهم الأنماط، واكتشاف الرؤى المهمة، وتقديم المعلومات بطريقة واضحة وسهلة المتابعة.',
+        'أؤمن أن التحليل الجيد لا يقتصر على إيجاد الأرقام، بل يشمل فهم معناها وتحويلها إلى شيء مفيد. هدفي هو جعل البيانات أبسط وأوضح وأكثر معنى.',
+      ],
       highlights: [
         {
           title: 'تحويل البيانات الخام إلى رؤى',
-          description:
-            'استكشاف البيانات لاكتشاف الأنماط والاتجاهات والنتائج المهمة.',
+          text: 'تنظيف البيانات غير المرتبة وغير المنظمة وتشكيلها بطريقة واضحة وسهلة الفهم.',
         },
         {
           title: 'بناء لوحات المعلومات',
-          description:
-            'إنشاء تصورات واضحة ومركزة تجعل البيانات أسهل للفهم.',
+          text: 'تصميم لوحات معلومات تجعل الاتجاهات والأنماط سهلة القراءة والفهم من النظرة الأولى.',
         },
         {
           title: 'دعم اتخاذ القرار',
-          description:
-            'عرض النتائج بطريقة عملية تربط البيانات بالقرارات.',
+          text: 'عرض النتائج كقصص واضحة تساعد على اتخاذ قرارات مبنية على البيانات.',
         },
       ],
     },
 
     skills: {
       eyebrow: 'المهارات',
-      title: 'أدواتي ونقاط قوتي',
-      items: [
-        'Microsoft Excel',
-        'Power BI',
-        'تنظيف البيانات',
-        'تحليل البيانات',
-        'تصور البيانات',
-      ],
+      title: 'الأدوات ونقاط القوة',
     },
 
     process: {
-      eyebrow: 'كيف أعمل',
-      title: 'من البيانات الخام إلى رؤية واضحة',
+      eyebrow: 'طريقة عملي',
+      title: 'من البيانات الخام إلى الرؤية الواضحة',
       steps: [
         {
           number: '01',
           title: 'الفهم',
           description:
-            'فهم البيانات والسياق والأسئلة التي نحتاج إلى الإجابة عنها.',
+            'فهم البيانات وسياق العمل والأسئلة التي نحتاج إلى الإجابة عنها.',
         },
         {
           number: '02',
           title: 'التنظيف',
           description:
-            'تجهيز البيانات من خلال التحقق من القيم المفقودة والتكرار وعدم الاتساق وجودة البيانات.',
+            'تجهيز البيانات من خلال التحقق من القيم المفقودة والتكرار والتناقضات وجودة البيانات.',
         },
         {
           number: '03',
           title: 'التحليل',
           description:
-            'استكشاف الأنماط والاتجاهات والعلاقات لتحويل البيانات الخام إلى رؤى مفيدة.',
+            'استكشاف الأنماط والاتجاهات والعلاقات لتحويل البيانات الخام إلى رؤى ذات معنى.',
         },
         {
           number: '04',
@@ -200,22 +267,29 @@ export const translations = {
     projects: {
       eyebrow: 'المشاريع',
       title: 'أعمال مختارة',
-      all: 'الكل',
-      excel: 'Excel',
-      powerBI: 'Power BI',
+      filters: {
+        all: 'الكل',
+        excel: 'Excel',
+        powerBI: 'Power BI',
+      },
       caseStudy: 'دراسة حالة',
       keyMetrics: 'أهم المؤشرات',
-      viewCaseStudy: 'استعرض دراسة الحالة',
-      noProjects: 'لا توجد مشاريع لهذا التصنيف.',
+      viewCaseStudy: 'عرض دراسة الحالة',
+      noProjects: 'لا توجد مشاريع لهذا الفلتر.',
     },
 
     contact: {
       eyebrow: 'تواصل معي',
       title: 'خلّنا نتواصل',
+      description:
+        'عندك مشروع، فرصة عمل، أو حابة نتكلم عن البيانات؟ يسعدني نتواصل.',
+      email: 'البريد الإلكتروني',
+      linkedin: 'LinkedIn',
+      github: 'GitHub',
     },
 
     footer: {
-      rights: 'جميع الحقوق محفوظة.',
+      copyright: 'جميع الحقوق محفوظة.',
     },
   },
-} as const;
+};
