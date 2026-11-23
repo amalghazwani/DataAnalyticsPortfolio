@@ -6,7 +6,7 @@ export default {
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#09090B',
+          DEFAULT: '#121014',
           deep: '#050506',
           surface: '#111013',
           card: '#171518',
