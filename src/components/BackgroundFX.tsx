@@ -4,34 +4,34 @@ export default function BackgroundFX() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#0B0507]"
       aria-hidden="true"
     >
-      {/* Deep burgundy base with a soft pink atmosphere behind the hero */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(229,138,175,0.12),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(116,31,58,0.16),transparent_38%),radial-gradient(circle_at_12%_78%,rgba(92,25,47,0.12),transparent_34%),linear-gradient(135deg,#0B0507_0%,#14080D_48%,#0B0507_100%)]" />
+      {/* Warm burgundy-black base with a soft pink atmosphere behind the hero */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_28%,rgba(229,138,175,0.11),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(112,30,58,0.16),transparent_38%),radial-gradient(circle_at_18%_78%,rgba(92,24,47,0.12),transparent_32%),linear-gradient(135deg,#0B0507_0%,#14080D_50%,#0B0507_100%)]" />
 
-      {/* Soft pink glow */}
+      {/* Main soft pink glow — kept subtle and centered behind the name */}
       <div
-        className="absolute left-1/2 top-[8%] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#E58AAF]/[0.09] blur-[140px]"
+        className="absolute left-1/2 top-[12%] h-[430px] w-[620px] -translate-x-1/2 rounded-full bg-[#E58AAF]/[0.10] blur-[140px]"
         style={{
           animation: 'background-glow-a 14s ease-in-out infinite alternate',
         }}
       />
 
-      {/* Soft burgundy glow — right */}
+      {/* Soft burgundy glow — upper right */}
       <div
-        className="absolute -right-[12%] top-[28%] h-[460px] w-[460px] rounded-full bg-[#7A2747]/[0.13] blur-[130px]"
+        className="absolute -right-[12%] top-[8%] h-[520px] w-[520px] rounded-full bg-[#7A2948]/[0.12] blur-[140px]"
         style={{
           animation: 'background-glow-b 18s ease-in-out infinite alternate',
         }}
       />
 
-      {/* Soft burgundy glow — bottom left */}
+      {/* Very subtle warm glow — bottom left */}
       <div
-        className="absolute -left-[12%] bottom-[4%] h-[420px] w-[420px] rounded-full bg-[#6B223F]/[0.11] blur-[130px]"
+        className="absolute -left-[10%] bottom-[4%] h-[420px] w-[420px] rounded-full bg-[#6B263F]/[0.09] blur-[140px]"
         style={{
           animation: 'background-glow-c 16s ease-in-out infinite alternate',
         }}
       />
 
-      {/* Subtle analytical wave lines */}
+      {/* Subtle wave lines */}
       <svg
         className="absolute inset-0 h-full w-full opacity-[0.24]"
         viewBox="0 0 1600 900"
@@ -45,11 +45,11 @@ export default function BackgroundFX() {
             x2="100%"
             y2="0%"
           >
-            <stop offset="0%" stopColor="#E58AAF" stopOpacity="0" />
-            <stop offset="34%" stopColor="#E58AAF" stopOpacity="0.34" />
-            <stop offset="55%" stopColor="#F2B7CB" stopOpacity="0.38" />
-            <stop offset="82%" stopColor="#B87894" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#E58AAF" stopOpacity="0" />
+            <stop offset="0%" stopColor="#8A4A61" stopOpacity="0" />
+            <stop offset="30%" stopColor="#C97899" stopOpacity="0.28" />
+            <stop offset="55%" stopColor="#E58AAF" stopOpacity="0.32" />
+            <stop offset="80%" stopColor="#8A4A61" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#8A4A61" stopOpacity="0" />
           </linearGradient>
 
           <linearGradient
@@ -59,10 +59,10 @@ export default function BackgroundFX() {
             x2="100%"
             y2="0%"
           >
-            <stop offset="0%" stopColor="#7A2747" stopOpacity="0" />
-            <stop offset="42%" stopColor="#B87894" stopOpacity="0.24" />
-            <stop offset="65%" stopColor="#E58AAF" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#7A2747" stopOpacity="0" />
+            <stop offset="0%" stopColor="#6E3047" stopOpacity="0" />
+            <stop offset="40%" stopColor="#A65A78" stopOpacity="0.20" />
+            <stop offset="65%" stopColor="#D27D9D" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#6E3047" stopOpacity="0" />
           </linearGradient>
         </defs>
 
@@ -117,7 +117,7 @@ export default function BackgroundFX() {
           }
 
           100% {
-            transform: translate3d(-50%, 20px, 0) scale(1.08);
+            transform: translate3d(-50%, 25px, 0) scale(1.08);
           }
         }
 
@@ -127,7 +127,7 @@ export default function BackgroundFX() {
           }
 
           100% {
-            transform: translate3d(-25px, 35px, 0) scale(1.1);
+            transform: translate3d(-30px, 25px, 0) scale(1.08);
           }
         }
 
@@ -137,7 +137,7 @@ export default function BackgroundFX() {
           }
 
           100% {
-            transform: translate3d(30px, -20px, 0) scale(1.08);
+            transform: translate3d(25px, -20px, 0) scale(1.08);
           }
         }
 
