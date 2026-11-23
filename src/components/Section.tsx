@@ -8,6 +8,14 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>() {
     const node = ref.current;
     if (!node) return;
 
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      setVisible(true);
+      return;
+    }
+
     if (typeof IntersectionObserver === 'undefined') {
       setVisible(true);
       return;
@@ -22,10 +30,14 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -60px 0px',
+      }
     );
 
     observer.observe(node);
+
     return () => observer.disconnect();
   }, []);
 
@@ -44,9 +56,11 @@ export function SectionHeading({
       <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">
         {eyebrow}
       </p>
+
       <h2 className="font-display text-3xl font-semibold text-text sm:text-4xl md:text-[2.75rem]">
         {title}
       </h2>
+
       <div className="mt-4 h-px w-16 bg-gradient-to-r from-accent/60 to-transparent" />
     </div>
   );
