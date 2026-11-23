@@ -7,6 +7,11 @@ import {
 } from 'lucide-react';
 import { SectionHeading, useReveal } from './Section';
 
+type SkillsTranslations = {
+  eyebrow: string;
+  title: string;
+};
+
 const skillItems = [
   {
     label: 'Microsoft Excel',
@@ -30,7 +35,11 @@ const skillItems = [
   },
 ] as const;
 
-export default function Skills() {
+export default function Skills({
+  translations,
+}: {
+  translations: SkillsTranslations;
+}) {
   const { ref, visible } = useReveal<HTMLDivElement>();
 
   return (
@@ -44,8 +53,8 @@ export default function Skills() {
           }`}
         >
           <SectionHeading
-            eyebrow="Skills"
-            title="Tools and strengths"
+            eyebrow={translations.eyebrow}
+            title={translations.title}
           />
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
