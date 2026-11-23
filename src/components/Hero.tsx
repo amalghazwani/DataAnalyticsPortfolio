@@ -7,9 +7,16 @@ type HeroTranslations = {
   tagline: string;
   projects: string;
   contact: string;
+  insight: string;
+  decisions: string;
+  visualLabel: string;
 };
 
-function AnalyticsVisual() {
+function AnalyticsVisual({
+  translations,
+}: {
+  translations: HeroTranslations;
+}) {
   return (
     <div className="relative mx-auto w-full max-w-[620px]">
       <div className="relative aspect-[1.15/1] w-full">
@@ -27,7 +34,7 @@ function AnalyticsVisual() {
         <span className="absolute right-[17%] bottom-[10%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.5)]" />
 
         {/* Soft grid */}
-        <div className="absolute left-[10%] right-[10%] top-[18%] bottom-[14%] rounded-[2rem] border border-accent/[0.08] bg-accent/[0.015]" />
+        <div className="absolute bottom-[14%] left-[10%] right-[10%] top-[18%] rounded-[2rem] border border-accent/[0.08] bg-accent/[0.015]" />
 
         <div className="absolute left-[15%] right-[15%] top-[27%] h-px bg-accent/[0.07]" />
         <div className="absolute left-[15%] right-[15%] top-[46%] h-px bg-accent/[0.07]" />
@@ -35,7 +42,6 @@ function AnalyticsVisual() {
 
         {/* Chart bars */}
         <div className="absolute bottom-[18%] left-[17%] right-[17%] flex h-[48%] items-end justify-center gap-3 sm:gap-5">
-
           <div className="h-[42%] w-8 rounded-t-md border border-accent/40 bg-gradient-to-t from-accent/[0.03] to-accent/20 sm:w-11" />
 
           <div className="h-[63%] w-8 rounded-t-md border border-accent/45 bg-gradient-to-t from-accent/[0.03] to-accent/25 sm:w-11" />
@@ -91,11 +97,11 @@ function AnalyticsVisual() {
 
             <div>
               <p className="text-[9px] font-semibold uppercase tracking-wider text-text-faint">
-                Insight
+                {translations.insight}
               </p>
 
               <p className="mt-0.5 text-[11px] font-semibold text-accent-light sm:text-xs">
-                Data → Decisions
+                {translations.decisions}
               </p>
             </div>
           </div>
@@ -104,7 +110,7 @@ function AnalyticsVisual() {
         {/* Bottom data label */}
         <div className="absolute bottom-[6%] left-[7%] rounded-full border border-ink-line bg-ink-card/70 px-3 py-1.5 backdrop-blur-md sm:px-4">
           <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-text-faint sm:text-[10px]">
-            Analyze · Visualize · Insight
+            {translations.visualLabel}
           </span>
         </div>
       </div>
@@ -137,7 +143,6 @@ export default function Hero({
         ref={ref}
         className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16"
       >
-
         {/* Text */}
         <div
           className={`order-1 transition-all duration-1000 ease-out ${
@@ -165,12 +170,6 @@ export default function Hero({
             {translations.tagline}
           </p>
 
-          {/* Supporting line */}
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-text-muted sm:text-[0.95rem]">
-            Turning data into clear insights, meaningful visualizations, and
-            decision-ready stories.
-          </p>
-
           {/* CTA */}
           <div className="mt-8 flex flex-wrap items-center gap-3.5 sm:mt-9">
             <a
@@ -178,12 +177,15 @@ export default function Hero({
               className="inline-flex items-center justify-center gap-3 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-ink-deep transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-light hover:shadow-card sm:px-7 sm:py-4 sm:text-base"
             >
               {translations.projects}
-              <ArrowRight size={18} />
+              <ArrowRight
+                size={18}
+                className="transition-transform duration-300 rtl:rotate-180"
+              />
             </a>
 
             <a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-full border border-accent/35 bg-transparent px-6 py-3.5 text-sm font-semibold text-text transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10 sm:px-7 sm:py-4 sm:text-base"
+              className="inline-flex items-center justify-center rounded-full border border-accent/35 bg-transparent px-6 py-3.5 text-sm font-semibold text-text transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10 hover:text-text sm:px-7 sm:py-4 sm:text-base"
             >
               {translations.contact}
             </a>
@@ -198,7 +200,7 @@ export default function Hero({
               : 'translate-y-8 opacity-0'
           }`}
         >
-          <AnalyticsVisual />
+          <AnalyticsVisual translations={translations} />
         </div>
       </div>
     </section>
