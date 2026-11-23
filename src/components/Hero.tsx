@@ -27,7 +27,8 @@ function AnalyticsVisual({
         {/* Decorative data points */}
         <span className="absolute left-[8%] top-[27%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_5s_ease-in-out_infinite]" />
 
-        <span className="absolute right-[9%] top-[19%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_6s_ease-in-out_infinite]" />
+        {/* Moved point — now clearly visible below the insight card */}
+        <span className="absolute right-[8%] top-[34%] h-2.5 w-2.5 rounded-full bg-accent-light/90 shadow-[0_0_18px_rgba(92,163,178,0.6)] animate-[pulse_6s_ease-in-out_infinite]" />
 
         <span className="absolute left-[10%] bottom-[23%] h-2 w-2 rounded-full bg-accent/90 shadow-[0_0_16px_rgba(92,163,178,0.5)] animate-[pulse_5.5s_ease-in-out_infinite]" />
 
@@ -71,21 +72,6 @@ function AnalyticsVisual({
             stroke="rgba(154, 207, 218, 0.95)"
             strokeWidth="4"
             strokeLinecap="round"
-          />
-
-          <circle
-            cx="585"
-            cy="70"
-            r="6"
-            fill="rgba(154, 207, 218, 1)"
-          />
-
-          <circle
-            cx="585"
-            cy="70"
-            r="14"
-            fill="rgba(92, 163, 178, 0.08)"
-            className="animate-[pulse_5s_ease-in-out_infinite]"
           />
         </svg>
 
