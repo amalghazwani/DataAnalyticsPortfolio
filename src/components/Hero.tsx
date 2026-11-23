@@ -24,7 +24,6 @@ export default function Hero({
         ref={ref}
         className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center text-center"
       >
-        {/* Main heading */}
         <div
           className={`transition-all duration-900 ease-out ${
             visible
@@ -37,7 +36,6 @@ export default function Hero({
           </h1>
         </div>
 
-        {/* Tagline */}
         <p
           className={`mt-7 max-w-2xl text-[15px] leading-relaxed text-text-muted transition-all delay-100 duration-900 ease-out sm:mt-8 sm:text-base ${
             visible
@@ -48,7 +46,6 @@ export default function Hero({
           {translations.tagline}
         </p>
 
-        {/* Buttons */}
         <div
           className={`mt-8 flex flex-wrap items-center justify-center gap-3 transition-all delay-200 duration-900 ease-out sm:mt-9 ${
             visible
@@ -75,6 +72,13 @@ export default function Hero({
             {translations.contact}
           </a>
         </div>
+
+        <div
+          aria-hidden="true"
+          className={`mt-10 h-px w-24 bg-accent/50 transition-all delay-300 duration-900 ${
+            visible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+          }`}
+        />
       </div>
     </section>
   );
