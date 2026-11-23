@@ -113,7 +113,13 @@ export default function Navbar({
         </a>
 
         {/* Right controls */}
-        <div className="flex items-center gap-2">
+        <div
+          className={`flex items-center gap-2 ${
+            language === 'ar'
+              ? 'flex-row'
+              : 'flex-row-reverse'
+          }`}
+        >
 
           {/* Navigation Menu */}
           <div className="relative">
