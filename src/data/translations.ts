@@ -12,7 +12,6 @@ export type TranslationSet = {
 
   hero: {
     name: string;
-    title: string;
     tagline: string;
     projects: string;
     contact: string;
@@ -84,7 +83,6 @@ export const translations: Record<Language, TranslationSet> = {
 
     hero: {
       name: 'Amal Ghazwani',
-      title: 'Data Analyst',
       tagline:
         'Transforming data into clear insights that support better decisions.',
       projects: 'View Projects',
@@ -168,7 +166,7 @@ export const translations: Record<Language, TranslationSet> = {
       eyebrow: 'Contact',
       title: 'Let’s connect',
       description:
-        'Have a project, opportunity, or just want to talk about data? I’d be happy to connect.',
+        'Have a project, opportunity, or inquiry? I’d be happy to connect and discuss how I can help.',
       email: 'Email',
       linkedin: 'LinkedIn',
       github: 'GitHub',
@@ -191,7 +189,6 @@ export const translations: Record<Language, TranslationSet> = {
 
     hero: {
       name: 'أمل غزواني',
-      title: 'محللة بيانات',
       tagline:
         'أحوّل البيانات إلى رؤى واضحة تساعد على اتخاذ قرارات أفضل.',
       projects: 'استعرض المشاريع',
@@ -275,7 +272,7 @@ export const translations: Record<Language, TranslationSet> = {
       eyebrow: 'تواصل معي',
       title: 'خلّنا نتواصل',
       description:
-        'عندك مشروع، فرصة عمل، أو حابة نتكلم عن البيانات؟ يسعدني نتواصل.',
+        'عندك مشروع، فرصة عمل، أو استفسار؟ يسعدني نتواصل ونناقش كيف يمكنني المساعدة.',
       email: 'البريد الإلكتروني',
       linkedin: 'LinkedIn',
       github: 'GitHub',
