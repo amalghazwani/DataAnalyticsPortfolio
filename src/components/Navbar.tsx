@@ -1,8 +1,38 @@
 import { useEffect, useState } from 'react';
 import { BarChart3, Menu, X } from 'lucide-react';
-import { navLinks } from '../data/content';
+import type { Language } from '../data/translations';
 
-export default function Navbar() {
+type NavbarTranslations = {
+  nav: {
+    home: string;
+    about: string;
+    skills: string;
+    process: string;
+    projects: string;
+    contact: string;
+  };
+};
+
+type NavbarProps = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  translations: NavbarTranslations;
+};
+
+const navItems = [
+  { key: 'home', href: '#home' },
+  { key: 'about', href: '#about' },
+  { key: 'skills', href: '#skills' },
+  { key: 'process', href: '#process' },
+  { key: 'projects', href: '#projects' },
+  { key: 'contact', href: '#contact' },
+] as const;
+
+export default function Navbar({
+  language,
+  setLanguage,
+  translations,
+}: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -14,15 +44,17 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    const sections = navLinks
-      .map((link) => document.querySelector(link.href))
+    const sections = navItems
+      .map((item) => document.querySelector(item.href))
       .filter(Boolean);
 
     const observer = new IntersectionObserver(
       (entries) => {
         const visibleSection = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          .sort(
+            (a, b) => b.intersectionRatio - a.intersectionRatio
+          )[0];
 
         if (visibleSection) {
           setActiveSection(visibleSection.target.id);
@@ -43,6 +75,11 @@ export default function Navbar() {
       observer.disconnect();
     };
   }, []);
+
+  const changeLanguage = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    setOpen(false);
+  };
 
   return (
     <header
@@ -69,7 +106,7 @@ export default function Navbar() {
             </p>
 
             <p className="text-[10px] uppercase tracking-[0.18em] text-text-faint">
-              Data Analyst
+              {language === 'ar' ? 'محللة بيانات' : 'Data Analyst'}
             </p>
           </div>
         </a>
@@ -77,21 +114,20 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-2 lg:flex">
           <ul className="flex items-center gap-1.5">
-            {navLinks.map((link) => {
-              const sectionId = link.href.replace('#', '');
-              const isActive = activeSection === sectionId;
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.replace('#', '');
 
               return (
-                <li key={link.href}>
+                <li key={item.href}>
                   <a
-                    href={link.href}
+                    href={item.href}
                     className={`relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
                       isActive
                         ? 'bg-accent/12 text-accent-light ring-1 ring-accent/25'
                         : 'text-text-muted hover:bg-accent/8 hover:text-text'
                     }`}
                   >
-                    {link.label}
+                    {translations.nav[item.key]}
 
                     {isActive && (
                       <span className="absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-accent" />
@@ -102,25 +138,35 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Language */}
+          {/* Language Switcher */}
           <div className="ml-3 flex items-center rounded-full border border-ink-line bg-ink-card/50 p-1">
             <button
               type="button"
-              className="rounded-full bg-accent/15 px-3 py-1.5 text-[11px] font-semibold text-accent-light"
+              onClick={() => changeLanguage('en')}
+              className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 ${
+                language === 'en'
+                  ? 'bg-accent/15 text-accent-light'
+                  : 'text-text-muted hover:text-text'
+              }`}
             >
               EN
             </button>
 
             <button
               type="button"
-              className="rounded-full px-3 py-1.5 text-[11px] font-semibold text-text-muted transition-colors hover:text-text"
+              onClick={() => changeLanguage('ar')}
+              className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 ${
+                language === 'ar'
+                  ? 'bg-accent/15 text-accent-light'
+                  : 'text-text-muted hover:text-text'
+              }`}
             >
               العربية
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu */}
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
@@ -138,14 +184,14 @@ export default function Navbar() {
           <div className="container-wide px-6 py-5 sm:px-8">
 
             <ul className="flex flex-col gap-1.5">
-              {navLinks.map((link) => {
-                const sectionId = link.href.replace('#', '');
-                const isActive = activeSection === sectionId;
+              {navItems.map((item) => {
+                const isActive =
+                  activeSection === item.href.replace('#', '');
 
                 return (
-                  <li key={link.href}>
+                  <li key={item.href}>
                     <a
-                      href={link.href}
+                      href={item.href}
                       onClick={() => setOpen(false)}
                       className={`block rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
                         isActive
@@ -153,24 +199,35 @@ export default function Navbar() {
                           : 'text-text-muted hover:bg-accent/8 hover:text-text'
                       }`}
                     >
-                      {link.label}
+                      {translations.nav[item.key]}
                     </a>
                   </li>
                 );
               })}
             </ul>
 
+            {/* Mobile Language Switcher */}
             <div className="mt-4 flex items-center gap-2 border-t border-ink-line pt-4">
               <button
                 type="button"
-                className="rounded-full bg-accent/15 px-4 py-2 text-xs font-semibold text-accent-light"
+                onClick={() => changeLanguage('en')}
+                className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+                  language === 'en'
+                    ? 'bg-accent/15 text-accent-light'
+                    : 'text-text-muted hover:text-text'
+                }`}
               >
                 EN
               </button>
 
               <button
                 type="button"
-                className="rounded-full px-4 py-2 text-xs font-semibold text-text-muted hover:text-text"
+                onClick={() => changeLanguage('ar')}
+                className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+                  language === 'ar'
+                    ? 'bg-accent/15 text-accent-light'
+                    : 'text-text-muted hover:text-text'
+                }`}
               >
                 العربية
               </button>
