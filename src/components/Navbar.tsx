@@ -94,6 +94,7 @@ export default function Navbar({
         {/* Brand */}
         <a
           href="#home"
+          onClick={() => setOpen(false)}
           className="group flex items-center gap-3 text-text transition-colors hover:text-accent-light"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent-light transition-all duration-300 group-hover:border-accent/60 group-hover:bg-accent/20">
@@ -111,35 +112,69 @@ export default function Navbar({
           </div>
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden items-center gap-2 lg:flex">
-          <ul className="flex items-center gap-1.5">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.replace('#', '');
+        {/* Right controls */}
+        <div className="flex items-center gap-2">
 
-              return (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className={`relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                      isActive
-                        ? 'bg-accent/12 text-accent-light ring-1 ring-accent/25'
-                        : 'text-text-muted hover:bg-accent/8 hover:text-text'
-                    }`}
-                  >
-                    {translations.nav[item.key]}
+          {/* Navigation Menu */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border bg-ink-card/50 text-text transition-all duration-300 ${
+                open
+                  ? 'border-accent/50 bg-accent/10 text-accent-light'
+                  : 'border-ink-line hover:border-accent/40 hover:bg-accent/10 hover:text-accent-light'
+              }`}
+              aria-label={
+                open
+                  ? 'Close navigation menu'
+                  : 'Open navigation menu'
+              }
+              aria-expanded={open}
+            >
+              {open ? <X size={19} /> : <Menu size={19} />}
+            </button>
 
-                    {isActive && (
-                      <span className="absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-accent" />
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+            {/* Dropdown Menu */}
+            {open && (
+              <div className="absolute right-0 top-12 z-50 w-52 rounded-2xl border border-ink-line bg-ink-card/95 p-2 shadow-card backdrop-blur-xl">
+                <nav>
+                  <ul className="flex flex-col gap-1">
+                    {navItems.map((item) => {
+                      const isActive =
+                        activeSection ===
+                        item.href.replace('#', '');
+
+                      return (
+                        <li key={item.href}>
+                          <a
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
+                              isActive
+                                ? 'bg-accent/12 text-accent-light ring-1 ring-accent/25'
+                                : 'text-text-muted hover:bg-accent/8 hover:text-text'
+                            }`}
+                          >
+                            <span>
+                              {translations.nav[item.key]}
+                            </span>
+
+                            {isActive && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(92,163,178,0.7)]" />
+                            )}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+              </div>
+            )}
+          </div>
 
           {/* Language Switcher */}
-          <div className="ml-3 flex items-center rounded-full border border-ink-line bg-ink-card/50 p-1">
+          <div className="flex items-center rounded-full border border-ink-line bg-ink-card/50 p-1">
             <button
               type="button"
               onClick={() => changeLanguage('en')}
@@ -165,76 +200,7 @@ export default function Navbar({
             </button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-line bg-ink-card/50 text-text transition-all duration-300 hover:border-accent/40 hover:bg-accent/10 hover:text-accent-light lg:hidden"
-          aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={open}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
       </nav>
-
-      {/* Mobile Navigation */}
-      {open && (
-        <div className="border-t border-accent/10 bg-ink/95 backdrop-blur-xl lg:hidden">
-          <div className="container-wide px-6 py-5 sm:px-8">
-
-            <ul className="flex flex-col gap-1.5">
-              {navItems.map((item) => {
-                const isActive =
-                  activeSection === item.href.replace('#', '');
-
-                return (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className={`block rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? 'bg-accent/12 text-accent-light ring-1 ring-accent/25'
-                          : 'text-text-muted hover:bg-accent/8 hover:text-text'
-                      }`}
-                    >
-                      {translations.nav[item.key]}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* Mobile Language Switcher */}
-            <div className="mt-4 flex items-center gap-2 border-t border-ink-line pt-4">
-              <button
-                type="button"
-                onClick={() => changeLanguage('en')}
-                className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
-                  language === 'en'
-                    ? 'bg-accent/15 text-accent-light'
-                    : 'text-text-muted hover:text-text'
-                }`}
-              >
-                EN
-              </button>
-
-              <button
-                type="button"
-                onClick={() => changeLanguage('ar')}
-                className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
-                  language === 'ar'
-                    ? 'bg-accent/15 text-accent-light'
-                    : 'text-text-muted hover:text-text'
-                }`}
-              >
-                العربية
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 }
