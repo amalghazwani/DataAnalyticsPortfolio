@@ -6,24 +6,24 @@ export default {
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#121014',
-          deep: '#050506',
-          surface: '#111013',
-          card: '#171518',
-          line: '#2B272A',
+          DEFAULT: '#090A12',
+          deep: '#070811',
+          surface: '#0B0B1A',
+          card: '#111022',
+          line: '#29253D',
         },
 
         accent: {
-          DEFAULT: '#E58AAF',
-          dark: '#C97899',
-          light: '#F1A9C5',
-          muted: '#B87894',
+          DEFAULT: '#B88CEF',
+          dark: '#8E63C9',
+          light: '#D9B9F5',
+          muted: '#9B6BC2',
         },
 
         text: {
-          DEFAULT: '#F5F3F4',
-          muted: '#A9A4A8',
-          faint: '#716B70',
+          DEFAULT: '#F4F1F5',
+          muted: '#A9A4AE',
+          faint: '#716B78',
         },
       },
 
@@ -40,7 +40,7 @@ export default {
           '0 2px 4px rgba(0, 0, 0, 0.4), 0 18px 44px rgba(0, 0, 0, 0.45)',
 
         glow:
-          '0 0 0 1px rgba(229, 138, 175, 0.18), 0 8px 30px rgba(229, 138, 175, 0.10)',
+          '0 0 0 1px rgba(184, 140, 239, 0.20), 0 8px 30px rgba(184, 140, 239, 0.12)',
       },
     },
   },
