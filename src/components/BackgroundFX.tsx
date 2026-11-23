@@ -1,59 +1,173 @@
 export default function BackgroundFX() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {/* base wash */}
-      <div className="absolute inset-0 bg-ink" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(92,163,178,0.07),transparent_60%)]" />
+    <div
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#070811]"
+      aria-hidden="true"
+    >
+      {/* Base gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(111,61,133,0.22),transparent_34%),radial-gradient(circle_at_18%_78%,rgba(104,55,128,0.16),transparent_30%),linear-gradient(135deg,#070811_0%,#0A0A17_48%,#080811_100%)]" />
 
-      {/* soft flowing forms */}
+      {/* Soft purple glow — top right */}
       <div
-        className="animate-drift-a absolute -top-40 right-[-12%] h-[620px] w-[620px] rounded-full opacity-60 blur-3xl"
+        className="absolute -right-[12%] top-[5%] h-[520px] w-[520px] rounded-full bg-[#7B4A91]/[0.16] blur-[130px]"
         style={{
-          background:
-            'radial-gradient(circle, rgba(92,163,178,0.14) 0%, rgba(92,163,178,0.05) 45%, transparent 70%)',
-        }}
-      />
-      <div
-        className="animate-drift-b absolute bottom-[-25%] left-[-10%] h-[560px] w-[560px] rounded-full opacity-50 blur-3xl"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(110,155,165,0.12) 0%, rgba(110,155,165,0.04) 50%, transparent 72%)',
-        }}
-      />
-      <div
-        className="animate-drift-a absolute left-[30%] top-[40%] h-[420px] w-[420px] rounded-full opacity-40 blur-3xl"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(92,163,178,0.08) 0%, transparent 70%)',
+          animation: 'background-glow-a 14s ease-in-out infinite alternate',
         }}
       />
 
-      {/* gentle flowing curve lines */}
+      {/* Soft pink glow — right center */}
+      <div
+        className="absolute right-[8%] top-[35%] h-[360px] w-[360px] rounded-full bg-[#D58AB5]/[0.09] blur-[120px]"
+        style={{
+          animation: 'background-glow-b 18s ease-in-out infinite alternate',
+        }}
+      />
+
+      {/* Soft purple glow — bottom left */}
+      <div
+        className="absolute -left-[10%] bottom-[4%] h-[420px] w-[420px] rounded-full bg-[#6D4A91]/[0.13] blur-[130px]"
+        style={{
+          animation: 'background-glow-c 16s ease-in-out infinite alternate',
+        }}
+      />
+
+      {/* Wave lines */}
       <svg
-        className="absolute inset-x-0 top-0 h-full w-full opacity-[0.05]"
-        viewBox="0 0 1440 900"
+        className="absolute inset-0 h-full w-full opacity-[0.32]"
+        viewBox="0 0 1600 900"
         preserveAspectRatio="none"
-        fill="none"
       >
+        <defs>
+          <linearGradient
+            id="wave-gradient-1"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop offset="0%" stopColor="#8E5AA8" stopOpacity="0" />
+            <stop offset="30%" stopColor="#A86EBB" stopOpacity="0.45" />
+            <stop offset="55%" stopColor="#D29ACD" stopOpacity="0.5" />
+            <stop offset="80%" stopColor="#8E5AA8" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#8E5AA8" stopOpacity="0" />
+          </linearGradient>
+
+          <linearGradient
+            id="wave-gradient-2"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop offset="0%" stopColor="#6E4C91" stopOpacity="0" />
+            <stop offset="40%" stopColor="#9D6DB4" stopOpacity="0.3" />
+            <stop offset="65%" stopColor="#D48FB7" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#6E4C91" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {/* Main wave */}
         <path
-          d="M-100 220 C 300 120, 620 340, 980 240 S 1560 160, 1560 160"
-          stroke="#5CA3B2"
-          strokeWidth="1.2"
+          d="M-80 145
+             C120 40, 300 65, 470 155
+             S780 245, 960 135
+             S1280 35, 1680 155"
+          fill="none"
+          stroke="url(#wave-gradient-1)"
+          strokeWidth="1"
         />
+
+        {/* Second wave */}
         <path
-          d="M-100 520 C 260 420, 640 640, 1000 540 S 1560 460, 1560 460"
-          stroke="#5CA3B2"
-          strokeWidth="1.2"
+          d="M-80 330
+             C130 210, 320 235, 500 340
+             S790 455, 980 330
+             S1300 210, 1680 350"
+          fill="none"
+          stroke="url(#wave-gradient-2)"
+          strokeWidth="1"
         />
+
+        {/* Third wave */}
         <path
-          d="M-100 760 C 320 660, 660 880, 1020 780 S 1560 700, 1560 700"
-          stroke="#5CA3B2"
-          strokeWidth="1.2"
+          d="M-80 520
+             C140 400, 320 425, 505 530
+             S800 650, 1000 520
+             S1300 410, 1680 535"
+          fill="none"
+          stroke="url(#wave-gradient-1)"
+          strokeWidth="0.9"
+        />
+
+        {/* Fourth wave */}
+        <path
+          d="M-80 720
+             C150 610, 350 625, 530 725
+             S820 840, 1010 715
+             S1320 610, 1680 735"
+          fill="none"
+          stroke="url(#wave-gradient-2)"
+          strokeWidth="0.9"
         />
       </svg>
 
-      {/* subtle vignette so content edges stay calm */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(10,16,19,0.5)_100%)]" />
+      {/* Tiny particles */}
+      <div className="absolute left-[7%] top-[24%] h-1 w-1 rounded-full bg-[#E7B6D8]/70 shadow-[0_0_10px_rgba(231,182,216,0.8)]" />
+
+      <div className="absolute left-[34%] top-[18%] h-[3px] w-[3px] rounded-full bg-[#C99ADB]/60 shadow-[0_0_9px_rgba(201,154,219,0.8)]" />
+
+      <div className="absolute left-[57%] top-[29%] h-1 w-1 rounded-full bg-[#E7B6D8]/50 shadow-[0_0_10px_rgba(231,182,216,0.7)]" />
+
+      <div className="absolute right-[27%] top-[17%] h-[3px] w-[3px] rounded-full bg-[#DDA8CF]/70 shadow-[0_0_10px_rgba(221,168,207,0.8)]" />
+
+      <div className="absolute right-[14%] top-[49%] h-1 w-1 rounded-full bg-[#F0C9E2]/60 shadow-[0_0_12px_rgba(240,201,226,0.8)]" />
+
+      <div className="absolute left-[51%] bottom-[27%] h-[3px] w-[3px] rounded-full bg-[#C89BD7]/60 shadow-[0_0_9px_rgba(200,155,215,0.8)]" />
+
+      <div className="absolute left-[19%] bottom-[17%] h-1 w-1 rounded-full bg-[#E0B1D5]/50 shadow-[0_0_10px_rgba(224,177,213,0.7)]" />
+
+      {/* Very subtle grain */}
+      <div className="absolute inset-0 opacity-[0.025] [background-image:radial-gradient(rgba(255,255,255,0.8)_0.5px,transparent_0.5px)] [background-size:5px_5px]" />
+
+      <style>{`
+        @keyframes background-glow-a {
+          0% {
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+
+          100% {
+            transform: translate3d(-35px, 25px, 0) scale(1.08);
+          }
+        }
+
+        @keyframes background-glow-b {
+          0% {
+            transform: translate3d(0, 0, 0) scale(1);
+            opacity: 0.7;
+          }
+
+          100% {
+            transform: translate3d(-25px, 35px, 0) scale(1.12);
+            opacity: 1;
+          }
+        }
+
+        @keyframes background-glow-c {
+          0% {
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+
+          100% {
+            transform: translate3d(30px, -20px, 0) scale(1.08);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
