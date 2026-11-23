@@ -1,88 +1,129 @@
-export const profile = {
-  name: 'Amal Ghazwani',
-  title: 'Data Analyst',
-  tagline: 'Finding the story hidden within the data.',
-  email: 'amal.s.ghazwani@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/amal-ghazwani-4037432aa',
-  github: 'https://github.com/amalghazwani',
-};
+import {
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  Mail,
+} from 'lucide-react';
+import { profile } from '../data/content';
+import { SectionHeading, useReveal } from './Section';
 
-export const skills = [
-  'Microsoft Excel',
-  'Power BI',
-  'Data Cleaning',
-  'Data Analysis',
-  'Data Visualization',
-] as const;
-
-export type StatItem = {
-  label: string;
-  value: string;
-};
-
-export type Project = {
-  name: string;
-  tools: string[];
+type ContactTranslations = {
+  eyebrow: string;
+  title: string;
   description: string;
-  stats?: StatItem[];
-  image?: string;
+  email: string;
+  linkedin: string;
+  github: string;
 };
 
-export const projects: Project[] = [
+const contactItems = [
   {
-    name: 'Retail Sales Performance Analysis',
-    tools: ['Microsoft Excel'],
-    description:
-      'An exploratory analysis of synthetic retail sales data using Excel to evaluate revenue performance, product categories, sales channels, and returns.',
-    image: '/projects/retail-sales.png',
-    stats: [
-      { label: 'Total Revenue', value: '$773,924.37' },
-      { label: 'Order Lines', value: '7,000' },
-      { label: 'Total Units', value: '11,853' },
-      { label: 'Top Category', value: 'Electronics · $326,204.01' },
-      { label: 'Top Channel', value: 'Web' },
-      { label: 'Highest Return Rate', value: 'Apparel · 20.70%' },
-    ],
+    key: 'email',
+    icon: Mail,
+    href: `mailto:${profile.email}`,
   },
-
   {
-    name: 'Adidas Sales Performance Analysis',
-    tools: ['Microsoft Excel'],
-    description:
-      'An analysis of Adidas sales data using Excel to evaluate sales performance, profitability, products, regions, and sales channels.',
-    image: '/projects/adidas-sales.png',
-    stats: [
-      { label: 'Total Sales', value: '$899.9M' },
-      { label: 'Operating Margin', value: '42.30%' },
-      { label: 'Transactions', value: '9,648' },
-      { label: 'Top Product', value: "Men's Street Footwear" },
-      { label: 'Top Region', value: 'West' },
-      { label: 'Leading Channel', value: 'In-store · 39.63%' },
-    ],
+    key: 'linkedin',
+    icon: Linkedin,
+    href: profile.linkedin,
   },
-
   {
-    name: 'Travel Analytics Dashboard',
-    tools: ['Power BI'],
-    description:
-      'An interactive Power BI dashboard analyzing travel patterns, destinations, accommodation preferences, transportation, and travel costs.',
-    image: '/projects/travel-dashboard.png',
-    stats: [
-      { label: 'Total Trips', value: '137' },
-      { label: 'Destinations', value: '39' },
-      { label: 'Avg. Trip Duration', value: '7.6 days' },
-      { label: 'Total Travel Cost', value: '$258,325' },
-      { label: 'Most Visited', value: 'Paris' },
-      { label: 'Most Common Stay', value: 'Hotels · 44%' },
-    ],
+    key: 'github',
+    icon: Github,
+    href: profile.github,
   },
-];
-
-export const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'How I Work', href: '#process' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
 ] as const;
+
+export default function Contact({
+  translations,
+}: {
+  translations: ContactTranslations;
+}) {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+
+  const labels = {
+    email: translations.email,
+    linkedin: translations.linkedin,
+    github: translations.github,
+  };
+
+  return (
+    <section id="contact" className="section-pad">
+      <div ref={ref}>
+        <div
+          className={`transition-all duration-700 ease-out ${
+            visible
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-6 opacity-0'
+          }`}
+        >
+          <div className="mx-auto max-w-4xl">
+            <SectionHeading
+              eyebrow={translations.eyebrow}
+              title={translations.title}
+            />
+
+            <div className="relative overflow-hidden rounded-3xl border border-ink-line bg-ink-card/70 p-7 shadow-card sm:p-10 lg:p-12">
+              {/* Decorative background */}
+              <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
+
+              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-accent/5 blur-3xl" />
+
+              <div className="relative">
+                <p className="max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">
+                  {translations.description}
+                </p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {contactItems.map(({ key, icon: Icon, href }, index) => (
+                    <a
+                      key={key}
+                      href={href}
+                      target={key === 'email' ? undefined : '_blank'}
+                      rel={
+                        key === 'email'
+                          ? undefined
+                          : 'noopener noreferrer'
+                      }
+                      style={{
+                        transitionDelay: `${index * 100}ms`,
+                      }}
+                      className={`group flex min-h-[92px] items-center gap-4 rounded-2xl border border-ink-line bg-ink/40 px-5 py-4 transition-all duration-700 hover:-translate-y-1 hover:border-accent/40 hover:bg-accent/5 hover:shadow-card ${
+                        visible
+                          ? 'translate-y-0 opacity-100'
+                          : 'translate-y-6 opacity-0'
+                      }`}
+                    >
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-ink-deep">
+                        <Icon size={19} strokeWidth={1.7} />
+                      </span>
+
+                      <span className="min-w-0">
+                        <span className="block text-xs font-semibold text-text">
+                          {labels[key]}
+                        </span>
+
+                        <span className="mt-1 block truncate text-[11px] text-text-faint">
+                          {key === 'email'
+                            ? profile.email
+                            : key === 'linkedin'
+                              ? 'LinkedIn'
+                              : 'GitHub'}
+                        </span>
+                      </span>
+
+                      <ArrowUpRight
+                        size={15}
+                        className="ml-auto shrink-0 text-text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
