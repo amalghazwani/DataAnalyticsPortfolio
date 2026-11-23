@@ -111,21 +111,6 @@ export default function BackgroundFX() {
         />
       </svg>
 
-      {/* Tiny particles */}
-      <div className="absolute left-[7%] top-[24%] h-1 w-1 rounded-full bg-[#E7B6D8]/70 shadow-[0_0_10px_rgba(231,182,216,0.8)]" />
-
-      <div className="absolute left-[34%] top-[18%] h-[3px] w-[3px] rounded-full bg-[#C99ADB]/60 shadow-[0_0_9px_rgba(201,154,219,0.8)]" />
-
-      <div className="absolute left-[57%] top-[29%] h-1 w-1 rounded-full bg-[#E7B6D8]/50 shadow-[0_0_10px_rgba(231,182,216,0.7)]" />
-
-      <div className="absolute right-[27%] top-[17%] h-[3px] w-[3px] rounded-full bg-[#DDA8CF]/70 shadow-[0_0_10px_rgba(221,168,207,0.8)]" />
-
-      <div className="absolute right-[14%] top-[49%] h-1 w-1 rounded-full bg-[#F0C9E2]/60 shadow-[0_0_12px_rgba(240,201,226,0.8)]" />
-
-      <div className="absolute left-[51%] bottom-[27%] h-[3px] w-[3px] rounded-full bg-[#C89BD7]/60 shadow-[0_0_9px_rgba(200,155,215,0.8)]" />
-
-      <div className="absolute left-[19%] bottom-[17%] h-1 w-1 rounded-full bg-[#E0B1D5]/50 shadow-[0_0_10px_rgba(224,177,213,0.7)]" />
-
       {/* Very subtle grain */}
       <div className="absolute inset-0 opacity-[0.025] [background-image:radial-gradient(rgba(255,255,255,0.8)_0.5px,transparent_0.5px)] [background-size:5px_5px]" />
 
