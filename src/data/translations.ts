@@ -163,9 +163,9 @@ export const translations: Record<Language, TranslationSet> = {
         excel: 'Excel',
         powerBI: 'Power BI',
       },
-      caseStudy: 'Case Study',
+      caseStudy: 'Project',
       keyMetrics: 'Key Metrics',
-      viewCaseStudy: 'View Case Study',
+      viewCaseStudy: 'View Project',
       noProjects: 'No projects found for this filter.',
     },
 
@@ -272,9 +272,9 @@ export const translations: Record<Language, TranslationSet> = {
         excel: 'Excel',
         powerBI: 'Power BI',
       },
-      caseStudy: 'دراسة حالة',
+      caseStudy: 'مشروع',
       keyMetrics: 'أهم المؤشرات',
-      viewCaseStudy: 'عرض دراسة الحالة',
+      viewCaseStudy: 'عرض المشروع',
       noProjects: 'لا توجد مشاريع لهذا الفلتر.',
     },
 
