@@ -10,6 +10,20 @@ import { useState } from 'react';
 import { projects, type Project } from '../data/content';
 import { SectionHeading, useReveal } from './Section';
 
+type ProjectsTranslations = {
+  eyebrow: string;
+  title: string;
+  filters: {
+    all: string;
+    excel: string;
+    powerBI: string;
+  };
+  caseStudy: string;
+  keyMetrics: string;
+  viewCaseStudy: string;
+  noProjects: string;
+};
+
 type FilterType = 'All' | 'Microsoft Excel' | 'Power BI';
 
 function ToolBadge({ tool }: { tool: string }) {
@@ -31,9 +45,11 @@ function ToolBadge({ tool }: { tool: string }) {
 function ProjectCard({
   project,
   index,
+  translations,
 }: {
   project: Project;
   index: number;
+  translations: ProjectsTranslations;
 }) {
   const [isImageOpen, setIsImageOpen] = useState(false);
 
@@ -56,7 +72,7 @@ function ProjectCard({
           </div>
 
           <span className="text-xs font-medium text-text-faint">
-            Case Study
+            {translations.caseStudy}
           </span>
         </div>
 
@@ -76,7 +92,7 @@ function ProjectCard({
           {hasStats && (
             <div className="mt-6">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
-                Key Metrics
+                {translations.keyMetrics}
               </p>
 
               <dl className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
@@ -106,10 +122,11 @@ function ProjectCard({
               disabled={!project.image}
               className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 text-sm font-semibold text-accent transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-ink-deep hover:shadow-card disabled:cursor-not-allowed disabled:opacity-50"
             >
-              View Case Study
+              {translations.viewCaseStudy}
+
               <ArrowUpRight
                 size={16}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-[-90deg]"
               />
             </button>
           </div>
@@ -147,7 +164,11 @@ function ProjectCard({
   );
 }
 
-export default function Projects() {
+export default function Projects({
+  translations,
+}: {
+  translations: ProjectsTranslations;
+}) {
   const { ref, visible } = useReveal<HTMLDivElement>();
   const [filter, setFilter] = useState<FilterType>('All');
 
@@ -158,10 +179,22 @@ export default function Projects() {
           project.tools.includes(filter)
         );
 
-  const filters: { label: string; value: FilterType }[] = [
-    { label: 'All', value: 'All' },
-    { label: 'Excel', value: 'Microsoft Excel' },
-    { label: 'Power BI', value: 'Power BI' },
+  const filters: {
+    label: string;
+    value: FilterType;
+  }[] = [
+    {
+      label: translations.filters.all,
+      value: 'All',
+    },
+    {
+      label: translations.filters.excel,
+      value: 'Microsoft Excel',
+    },
+    {
+      label: translations.filters.powerBI,
+      value: 'Power BI',
+    },
   ];
 
   return (
@@ -176,8 +209,8 @@ export default function Projects() {
         >
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Projects"
-              title="Selected work"
+              eyebrow={translations.eyebrow}
+              title={translations.title}
             />
 
             {/* Filters */}
@@ -214,6 +247,7 @@ export default function Projects() {
                 key={project.name}
                 project={project}
                 index={index}
+                translations={translations}
               />
             ))}
           </div>
@@ -221,7 +255,7 @@ export default function Projects() {
           {filteredProjects.length === 0 && (
             <div className="rounded-3xl border border-dashed border-ink-line bg-ink-card/40 p-10 text-center">
               <p className="text-sm text-text-muted">
-                No projects found for this filter.
+                {translations.noProjects}
               </p>
             </div>
           )}
