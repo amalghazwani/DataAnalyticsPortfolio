@@ -112,99 +112,115 @@ export default function Navbar({
           </div>
         </a>
 
-        {/* Right controls */}
+        {/* Controls */}
         <div
-          className={`flex items-center gap-2 ${
-            language === 'ar'
-              ? 'flex-row'
-              : 'flex-row-reverse'
-          }`}
+          dir="ltr"
+          className="flex items-center gap-2"
         >
 
           {/* Navigation Menu */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setOpen((value) => !value)}
-              className={`flex h-10 w-10 items-center justify-center rounded-full border bg-ink-card/50 text-text transition-all duration-300 ${
-                open
-                  ? 'border-accent/50 bg-accent/10 text-accent-light'
-                  : 'border-ink-line hover:border-accent/40 hover:bg-accent/10 hover:text-accent-light'
-              }`}
-              aria-label={
-                open
-                  ? 'Close navigation menu'
-                  : 'Open navigation menu'
-              }
-              aria-expanded={open}
-            >
-              {open ? <X size={19} /> : <Menu size={19} />}
-            </button>
+          <div
+            className={
+              language === 'ar'
+                ? 'order-1'
+                : 'order-2'
+            }
+          >
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setOpen((value) => !value)}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border bg-ink-card/50 text-text transition-all duration-300 ${
+                  open
+                    ? 'border-accent/50 bg-accent/10 text-accent-light'
+                    : 'border-ink-line hover:border-accent/40 hover:bg-accent/10 hover:text-accent-light'
+                }`}
+                aria-label={
+                  open
+                    ? 'Close navigation menu'
+                    : 'Open navigation menu'
+                }
+                aria-expanded={open}
+              >
+                {open ? <X size={19} /> : <Menu size={19} />}
+              </button>
 
-            {/* Dropdown Menu */}
-            {open && (
-              <div className="absolute right-0 top-12 z-50 w-52 rounded-2xl border border-ink-line bg-ink-card/95 p-2 shadow-card backdrop-blur-xl">
-                <nav>
-                  <ul className="flex flex-col gap-1">
-                    {navItems.map((item) => {
-                      const isActive =
-                        activeSection ===
-                        item.href.replace('#', '');
+              {/* Dropdown Menu */}
+              {open && (
+                <div className="absolute right-0 top-12 z-50 w-52 rounded-2xl border border-ink-line bg-ink-card/95 p-2 shadow-card backdrop-blur-xl">
+                  <nav>
+                    <ul className="flex flex-col gap-1">
+                      {navItems.map((item) => {
+                        const isActive =
+                          activeSection ===
+                          item.href.replace('#', '');
 
-                      return (
-                        <li key={item.href}>
-                          <a
-                            href={item.href}
-                            onClick={() => setOpen(false)}
-                            className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                              isActive
-                                ? 'bg-accent/12 text-accent-light ring-1 ring-accent/25'
-                                : 'text-text-muted hover:bg-accent/8 hover:text-text'
-                            }`}
-                          >
-                            <span>
-                              {translations.nav[item.key]}
-                            </span>
+                        return (
+                          <li key={item.href}>
+                            <a
+                              href={item.href}
+                              onClick={() => setOpen(false)}
+                              className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
+                                isActive
+                                  ? 'bg-accent/12 text-accent-light ring-1 ring-accent/25'
+                                  : 'text-text-muted hover:bg-accent/8 hover:text-text'
+                              }`}
+                            >
+                              <span>
+                                {translations.nav[item.key]}
+                              </span>
 
-                            {isActive && (
-                              <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(92,163,178,0.7)]" />
-                            )}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-              </div>
-            )}
+                              {isActive && (
+                                <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(92,163,178,0.7)]" />
+                              )}
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </nav>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Language Switcher */}
-          <div className="flex items-center rounded-full border border-ink-line bg-ink-card/50 p-1">
-            <button
-              type="button"
-              onClick={() => changeLanguage('en')}
-              className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 ${
-                language === 'en'
-                  ? 'bg-accent/15 text-accent-light'
-                  : 'text-text-muted hover:text-text'
-              }`}
-            >
-              EN
-            </button>
+          <div
+            className={
+              language === 'ar'
+                ? 'order-2'
+                : 'order-1'
+            }
+          >
+            <div className="flex items-center rounded-full border border-ink-line bg-ink-card/50 p-1">
 
-            <button
-              type="button"
-              onClick={() => changeLanguage('ar')}
-              className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 ${
-                language === 'ar'
-                  ? 'bg-accent/15 text-accent-light'
-                  : 'text-text-muted hover:text-text'
-              }`}
-            >
-              العربية
-            </button>
+              <button
+                type="button"
+                onClick={() => changeLanguage('en')}
+                className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 ${
+                  language === 'en'
+                    ? 'bg-accent/15 text-accent-light'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                EN
+              </button>
+
+              <button
+                type="button"
+                onClick={() => changeLanguage('ar')}
+                className={`rounded-full px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 ${
+                  language === 'ar'
+                    ? 'bg-accent/15 text-accent-light'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                العربية
+              </button>
+
+            </div>
           </div>
+
         </div>
       </nav>
     </header>
