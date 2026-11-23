@@ -1,26 +1,34 @@
-import { Mail, Linkedin, Github } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { profile, navLinks } from '../data/content';
 
-export default function Footer() {
+type FooterTranslations = {
+  copyright: string;
+};
+
+export default function Footer({
+  translations,
+}: {
+  translations: FooterTranslations;
+}) {
   return (
     <footer className="border-t border-ink-line/60">
       <div className="container-wide px-6 py-10 sm:px-8">
         <div className="flex flex-col items-center gap-5">
-          {/* Main Navigation */}
+          {/* Navigation */}
           <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            {navLinks.map((l) => (
-              <li key={l.href}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
                 <a
-                  href={l.href}
+                  href={link.href}
                   className="text-xs font-medium text-text-muted transition-colors hover:text-accent-light"
                 >
-                  {l.label}
+                  {link.label}
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* Contact Links */}
+          {/* Social links */}
           <div className="flex items-center gap-3">
             <a
               href={`mailto:${profile.email}`}
@@ -53,7 +61,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-center text-xs text-text-faint">
-            © {new Date().getFullYear()} All rights reserved.
+            © {new Date().getFullYear()} {translations.copyright}
           </p>
         </div>
       </div>
