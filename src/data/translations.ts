@@ -1,9 +1,10 @@
 export type Language = 'en' | 'ar';
 
 export type TranslationSet = {
-  nav: { home: string; about: string; skills: string; process: string; projects: string; contact: string };
+  nav: { home: string; about: string; experience: string; skills: string; process: string; projects: string; contact: string };
   hero: { name: string; tagline: string; projects: string; contact: string };
   about: { eyebrow: string; title: string; paragraphs: string[]; highlights: { title: string; text: string }[] };
+  experience: { eyebrow: string; title: string; education: string; degree: string; gpa: string; honors: string; certifications: string; },
   skills: { eyebrow: string; title: string };
   process: { eyebrow: string; title: string; steps: { number: string; title: string; description: string }[] };
   projects: { eyebrow: string; title: string; filters: { all: string; excel: string; powerBI: string }; caseStudy: string; keyMetrics: string; viewCaseStudy: string; noProjects: string };
@@ -14,7 +15,7 @@ export type TranslationSet = {
 export const translations: Record<Language, TranslationSet> = {
   en: {
     nav: {
-      home: 'Home', about: 'About', skills: 'Skills', process: 'How I Work', projects: 'Projects', contact: 'Contact',
+      home: 'Home', about: 'About', experience: 'Experience', skills: 'Skills', process: 'How I Work', projects: 'Projects', contact: 'Contact',
     },
     hero: {
       name: 'Amal Ghazwani',
@@ -35,6 +36,7 @@ export const translations: Record<Language, TranslationSet> = {
         { title: 'Supporting decisions', text: 'Presenting findings as decision-ready stories that support data-driven choices.' },
       ],
     },
+    experience: { eyebrow: 'Experience & Education', title: 'A concise view of my background', education: 'Education', degree: 'Bachelor of Management Information Systems (MIS)', gpa: 'GPA 4.38 / 5.00', honors: 'Second-Class Honors', certifications: 'Training & Certifications' },
     skills: { eyebrow: 'Skills', title: 'Tools and strengths' },
     process: {
       eyebrow: 'How I Work',
@@ -61,7 +63,7 @@ export const translations: Record<Language, TranslationSet> = {
 
   ar: {
     nav: {
-      home: 'الرئيسية', about: 'نبذة عني', skills: 'المهارات', process: 'طريقة عملي', projects: 'المشاريع', contact: 'تواصل معي',
+      home: 'الرئيسية', about: 'نبذة عني', experience: 'الخبرات والتعليم', skills: 'المهارات', process: 'طريقة عملي', projects: 'المشاريع', contact: 'تواصل معي',
     },
     hero: {
       name: 'أمل غزواني',
@@ -82,6 +84,7 @@ export const translations: Record<Language, TranslationSet> = {
         { title: 'دعم اتخاذ القرار', text: 'عرض النتائج كقصص واضحة تساعد على اتخاذ قرارات مبنية على البيانات.' },
       ],
     },
+    experience: { eyebrow: 'الخبرات والتعليم', title: 'نبذة مختصرة عن مسيرتي', education: 'التعليم', degree: 'بكالوريوس نظم المعلومات الإدارية (MIS)', gpa: 'المعدل 4.38 من 5.00', honors: 'مرتبة الشرف الثانية', certifications: 'الدورات والشهادات' },
     skills: { eyebrow: 'المهارات', title: 'الأدوات ونقاط القوة' },
     process: {
       eyebrow: 'طريقة عملي',
