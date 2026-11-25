@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowUpRight, BarChart3, BriefcaseBusiness, Check, Database, FileSpreadsheet, Github, GraduationCap, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { ArrowUpRight, BarChart3, BriefcaseBusiness, Database, FileSpreadsheet, Github, GraduationCap, Linkedin, Mail, Menu, Moon, Sun, X } from 'lucide-react';
 import { profile, skills, timeline, projects } from './data/content';
 import { translations, type Language } from './data/translations';
 
@@ -42,9 +42,9 @@ export default function App() {
   const [language, setLanguage] = useState<Language>(() => {
     try { const saved = localStorage.getItem('lang'); return saved === 'ar' || saved === 'en' ? saved : 'en'; } catch { return 'en'; }
   });
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);\n  const [theme, setTheme] = useState<'dark' | 'light'>(() => { try { return localStorage.getItem('theme') === 'light' ? 'light' : 'dark'; } catch { return 'dark'; } });
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
-  const t = translations[language];
+  const t = translations[language];\n  const isLight = theme === 'light';
   const isArabic = language === 'ar';
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function App() {
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
     document.title = isArabic ? 'أمل غزواني — محللة بيانات' : 'Amal Ghazwani — Data Analyst';
     try { localStorage.setItem('lang', language); } catch {}
-  }, [language, isArabic]);
+  }, [language, isArabic]);\n\n  useEffect(() => {\n    document.documentElement.dataset.theme = theme;\n    try { localStorage.setItem('theme', theme); } catch {}\n  }, [theme]);
 
   useEffect(() => {
     document.body.style.overflow = selectedProject ? 'hidden' : '';
@@ -85,79 +85,97 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f5f7fa] text-slate-950">
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
-        <nav className="mx-auto flex h-[68px] max-w-6xl items-center justify-between rounded-2xl border border-white/70 bg-white/90 px-4 shadow-[0_12px_40px_rgba(15,32,50,0.08)] backdrop-blur-xl sm:px-6">
-          <button onClick={() => scrollTo('home')} className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0b1d30] text-sm font-semibold text-white">AG</span>
+        <nav className="mx-auto flex h-[64px] max-w-6xl items-center justify-between rounded-2xl border border-white/10 bg-[#071526]/75 px-4 shadow-[0_14px_45px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:px-6">
+          <button onClick={() => scrollTo('home')} className="flex items-center gap-3" aria-label="Home">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#8fb0c8]/25 bg-white/[0.04] font-display text-sm text-white">AG</span>
             <span className="hidden text-left sm:block">
-              <span className="block font-display text-[15px] font-semibold text-slate-950">Amal Ghazwani</span>
-              <span className="block text-[9px] font-bold uppercase tracking-[0.22em] text-slate-400">{isArabic ? 'محللة بيانات' : 'Data Analyst'}</span>
+              <span className="block text-[10px] font-bold uppercase tracking-[0.25em] text-[#a9bfd0]">Data Analyst</span>
             </span>
           </button>
 
           <div className="hidden items-center gap-1 md:flex">
-            {nav.map(([key, labelKey]) => (
-              <button key={key} onClick={() => scrollTo(key)} className="rounded-full px-3 py-2 text-[11px] font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-950">
-                {t.nav[labelKey]}
-              </button>
-            ))}
+            <span className="mx-2 h-5 w-px bg-white/10" />
+            <button onClick={() => setMenuOpen((v) => !v)} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition hover:border-[#8fb0c8]/40 hover:bg-white/[0.08]" aria-expanded={menuOpen} aria-label={isArabic ? 'فتح قائمة الصفحات' : 'Open pages menu'}>
+              <Menu size={15} /> <span>{isArabic ? 'الصفحات' : 'Pages'}</span>
+            </button>
           </div>
 
           <div className="flex items-center gap-2">
-            <div dir="ltr" className="flex rounded-full border border-slate-200 bg-slate-50 p-1">
-              <button onClick={() => setLanguage('en')} className={language === 'en' ? 'rounded-full bg-[#0b1d30] px-2.5 py-1.5 text-[9px] font-bold text-white' : 'rounded-full px-2.5 py-1.5 text-[9px] font-bold text-slate-500'}>EN</button>
-              <button onClick={() => setLanguage('ar')} className={language === 'ar' ? 'rounded-full bg-[#0b1d30] px-2.5 py-1.5 text-[9px] font-bold text-white' : 'rounded-full px-2.5 py-1.5 text-[9px] font-bold text-slate-500'}>AR</button>
-            </div>
-            <button onClick={() => setMenuOpen((v) => !v)} className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden" aria-label={isArabic ? 'القائمة' : 'Menu'}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
+            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[9px] font-bold tracking-[0.16em] text-white transition hover:border-[#8fb0c8]/40" aria-label={isArabic ? 'تغيير اللغة' : 'Change language'}>
+              {language === 'en' ? 'AR' : 'EN'}
+            </button>
+            <button onClick={() => setTheme(isLight ? 'dark' : 'light')} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[#c6d7e4] transition hover:border-[#8fb0c8]/40 hover:text-white" aria-label={isLight ? (isArabic ? 'الوضع الداكن' : 'Dark mode') : (isArabic ? 'الوضع الفاتح' : 'Light mode')}>
+              {isLight ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
+            <button onClick={() => setMenuOpen((v) => !v)} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white md:hidden" aria-label={isArabic ? 'القائمة' : 'Menu'}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
           </div>
 
           {menuOpen && (
-            <div className="absolute inset-x-4 top-[76px] rounded-2xl border border-slate-200 bg-white p-2 shadow-xl md:hidden">
-              {nav.map(([key, labelKey]) => <button key={key} onClick={() => scrollTo(key)} className="block w-full rounded-xl px-4 py-3 text-start text-sm font-semibold text-slate-600 hover:bg-slate-50">{t.nav[labelKey]}</button>)}
+            <div className="absolute right-4 top-[72px] w-64 rounded-2xl border border-white/10 bg-[#0b1d30]/95 p-2 shadow-2xl backdrop-blur-xl sm:right-6">
+              {nav.map(([key, labelKey]) => (
+                <button key={key} onClick={() => scrollTo(key)} className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-start text-sm font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white">
+                  <span>{t.nav[labelKey]}</span><ArrowUpRight size={13} />
+                </button>
+              ))}
             </div>
           )}
         </nav>
       </header>
 
       <main>
-        <section id="home" className="relative overflow-hidden bg-[#071526] pt-36 text-white sm:pt-44">
-          <div className="absolute inset-0">
-            <div className="absolute -left-32 top-20 h-96 w-96 rounded-full bg-[#315b7a]/25 blur-[110px]" />
-            <div className="absolute right-[-10%] top-[-5%] h-[520px] w-[520px] rounded-full bg-[#5A86A8]/15 blur-[120px]" />
-            <div className="absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(255,255,255,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.22)_1px,transparent_1px)] [background-size:72px_72px]" />
-            <svg className="absolute bottom-[-80px] left-0 h-[360px] w-full opacity-40" viewBox="0 0 1600 360" preserveAspectRatio="none">
-              <defs><linearGradient id="heroStroke" x1="0%" x2="100%"><stop offset="0%" stopColor="#5A86A8" stopOpacity="0"/><stop offset="45%" stopColor="#8fb0c8" stopOpacity=".65"/><stop offset="100%" stopColor="#5A86A8" stopOpacity="0"/></linearGradient></defs>
-              <path d="M-50 250 C250 90 410 350 690 205 S1130 95 1650 220" fill="none" stroke="url(#heroStroke)" strokeWidth="1.2"/>
-              <path d="M-50 266 C250 106 410 366 690 221 S1130 111 1650 236" fill="none" stroke="url(#heroStroke)" strokeWidth=".7" opacity=".5"/>
+        <section id="home" className="scroll-mt-24 relative overflow-hidden bg-[#071526] pt-28 text-white sm:pt-32">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -left-40 top-10 h-[460px] w-[460px] rounded-full bg-[#315b7a]/20 blur-[130px]" />
+            <div className="absolute right-[-5%] top-[-5%] h-[620px] w-[620px] rounded-full bg-[#7c6ee6]/12 blur-[140px]" />
+            <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.22)_1px,transparent_1px)] [background-size:72px_72px]" />
+            <svg className="absolute bottom-[-70px] left-0 h-[300px] w-full opacity-50" viewBox="0 0 1600 300" preserveAspectRatio="none" aria-hidden="true">
+              <defs><linearGradient id="heroWave" x1="0%" x2="100%"><stop offset="0%" stopColor="#5A86A8" stopOpacity="0"/><stop offset="50%" stopColor="#9f8cff" stopOpacity=".7"/><stop offset="100%" stopColor="#5A86A8" stopOpacity="0"/></linearGradient></defs>
+              <path d="M-50 230 C220 70 410 330 680 180 S1120 75 1650 205" fill="none" stroke="url(#heroWave)" strokeWidth="1.2"/>
+              <path d="M-50 245 C220 85 410 345 680 195 S1120 90 1650 220" fill="none" stroke="url(#heroWave)" strokeWidth=".7" opacity=".55"/>
             </svg>
           </div>
 
-          <div className="relative mx-auto grid max-w-6xl gap-14 px-6 pb-28 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:items-end lg:pb-36">
-            <div className={isArabic ? 'text-right' : 'text-left'}>
-              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a9bfd0]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#7fa5bf] shadow-[0_0_12px_#7fa5bf]" />
-                {isArabic ? 'محللة بيانات • ملف أعمال' : 'Data Analyst • Portfolio'}
+          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 pb-28 sm:px-8 lg:grid-cols-[.92fr_1.08fr] lg:gap-4 lg:pb-32">
+            <div className={isArabic ? 'order-2 text-right lg:order-1' : 'order-2 text-left lg:order-1'}>
+              <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.28em] text-[#a9bfd0]">{isArabic ? 'محللة بيانات' : 'DATA ANALYST'}</p>
+              <h1 className="font-display text-[clamp(2.7rem,9vw,6.6rem)] font-medium leading-[.94] tracking-[-.055em] text-white whitespace-nowrap">Amal <span className="text-[#a997ff]">Ghazwani</span></h1>
+              <p className="mt-6 max-w-xl text-[14px] leading-8 text-slate-300 sm:text-base">{t.hero.tagline}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button onClick={() => scrollTo('projects')} className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-xs font-bold text-[#071526] transition hover:-translate-y-0.5 hover:bg-[#e5e0ff]">{t.hero.projects}<ArrowUpRight size={15}/></button>
+                <button onClick={() => scrollTo('contact')} className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:border-[#a997ff]/60">{t.hero.contact}</button>
               </div>
-              <h1 className="max-w-4xl font-display text-[clamp(2.7rem,9vw,7.2rem)] font-medium leading-[.92] tracking-[-.055em] text-white sm:text-[clamp(3.2rem,9vw,7.2rem)]">
-                Amal <span className="text-[#8fb0c8]">Ghazwani</span>
-              </h1>
-              <p className="mt-7 max-w-2xl text-[15px] leading-8 text-slate-300 sm:text-lg">{t.hero.tagline}</p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <button onClick={() => scrollTo('projects')} className="group inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#0b1d30] transition hover:-translate-y-0.5 hover:bg-[#dce8f0]">{t.hero.projects}<ArrowUpRight size={16} /></button>
-                <button onClick={() => scrollTo('contact')} className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.05] px-6 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-white/40">{t.hero.contact}</button>
-              </div>
+              <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">{isArabic ? 'المملكة العربية السعودية • متاحة للفرص' : 'Saudi Arabia • Open to opportunities'}</p>
             </div>
 
-            <div className="relative">
-              <div className="grid grid-cols-2 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.055] backdrop-blur-md">
-                {statCards.map(([Icon, title, sub], index) => (
-                  <div key={index} className="min-h-[132px] border-white/10 p-5 odd:border-r even:border-l odd:border-b even:border-b sm:p-6">
-                    <Icon size={18} className="mb-5 text-[#8fb0c8]" />
-                    <p className="text-sm font-semibold text-white">{title}</p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.13em] text-slate-400">{sub}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">{isArabic ? 'نظم المعلومات الإدارية • جازان' : 'Management Information Systems • Jazan'}</p>
+            <div className="order-1 relative flex min-h-[310px] items-center justify-center lg:order-2 lg:min-h-[520px]">
+              <div className="absolute h-[250px] w-[250px] rounded-full bg-[#6f67d9]/18 blur-[80px] sm:h-[340px] sm:w-[340px]" />
+              <svg className="relative h-[310px] w-full max-w-[620px] overflow-visible sm:h-[400px] lg:h-[500px]" viewBox="0 0 620 500" aria-label="3D data visualization" role="img">
+                <defs>
+                  <linearGradient id="barA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stopColor="#4e7ca1"/><stop offset="1" stopColor="#b7a9ff"/></linearGradient>
+                  <linearGradient id="barB" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stopColor="#6b7fe0"/><stop offset="1" stopColor="#9fd8ff"/></linearGradient>
+                  <filter id="glow"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                </defs>
+                <g opacity=".22" stroke="#8fb0c8" strokeWidth="1">
+                  <path d="M95 390 L520 390"/><path d="M130 350 L555 350"/><path d="M165 310 L590 310"/>
+                  <path d="M150 160 L150 390"/><path d="M230 110 L230 390"/><path d="M310 80 L310 390"/><path d="M390 105 L390 390"/><path d="M470 145 L470 390"/>
+                </g>
+                <ellipse cx="325" cy="395" rx="220" ry="38" fill="none" stroke="#8e7fff" strokeOpacity=".7" filter="url(#glow)"/>
+                <ellipse cx="325" cy="395" rx="185" ry="30" fill="none" stroke="#67c9ff" strokeOpacity=".35"/>
+                <g filter="url(#glow)">
+                  <rect x="150" y="300" width="48" height="90" rx="5" fill="url(#barA)" fillOpacity=".72" stroke="#a7d8ff"/>
+                  <rect x="220" y="245" width="48" height="145" rx="5" fill="url(#barB)" fillOpacity=".72" stroke="#b6e1ff"/>
+                  <rect x="290" y="185" width="48" height="205" rx="5" fill="url(#barA)" fillOpacity=".8" stroke="#d3caff"/>
+                  <rect x="360" y="135" width="48" height="255" rx="5" fill="url(#barB)" fillOpacity=".82" stroke="#d2edff"/>
+                  <rect x="430" y="82" width="48" height="308" rx="5" fill="url(#barA)" fillOpacity=".84" stroke="#e1d9ff"/>
+                </g>
+                <path d="M120 300 C215 250 280 275 350 215 S475 150 535 105" fill="none" stroke="#d8d2ff" strokeWidth="2" filter="url(#glow)"/>
+                <circle cx="120" cy="300" r="6" fill="#cfc8ff"/><circle cx="350" cy="215" r="6" fill="#a9e4ff"/><circle cx="535" cy="105" r="7" fill="#d9d4ff"/>
+                <g>
+                  <rect x="100" y="135" width="82" height="70" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(159,140,255,.45)"/>
+                  <rect x="450" y="45" width="88" height="72" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(103,201,255,.35)"/>
+                  <text x="141" y="177" textAnchor="middle" fill="#b7a9ff" fontSize="28">▥</text><text x="494" y="89" textAnchor="middle" fill="#9fd8ff" fontSize="26">◔</text>
+                </g>
+              </svg>
             </div>
           </div>
         </section>
