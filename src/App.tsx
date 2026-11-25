@@ -37,7 +37,7 @@ export default function App() {
         <main>
           <Hero translations={t.hero} />
           <About translations={t.about} />
-          <Experience translations={t.experience} />
+          <Experience translations={t.experience} language={language} />
           <Skills translations={t.skills} />
           <Process translations={t.process} />
           <Projects translations={t.projects} />
