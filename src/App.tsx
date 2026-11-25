@@ -10,7 +10,6 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Intro from './components/Intro';
-import Extras from './components/Extras';
 import { translations, type Language } from './data/translations';
 
 export default function App() {
@@ -47,7 +46,6 @@ export default function App() {
     <div className="relative min-h-screen bg-ink">
       <Intro />
       <BackgroundFX />
-      <Extras language={language} />
 
       <div className="relative z-10">
         <Navbar
@@ -62,11 +60,11 @@ export default function App() {
           <Experience translations={t.experience} language={language} />
           <Skills translations={t.skills} />
           <Process translations={t.process} />
-          <Projects translations={t.projects} language={language} />
+          <Projects translations={t.projects} />
           <Contact translations={t.contact} />
         </main>
 
-        <Footer translations={t.footer} nav={t.nav} />
+        <Footer translations={t.footer} />
       </div>
     </div>
   );
