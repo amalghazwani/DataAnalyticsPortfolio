@@ -10,9 +10,43 @@ export const profile = {
 export const skills = [
   'Microsoft Excel',
   'Power BI',
+  'SQL',
   'Data Cleaning',
   'Data Analysis',
   'Data Visualization',
+  'Microsoft Word',
+] as const;
+
+export const experience = [
+  {
+    role: 'Institutional Performance Specialist',
+    company: 'Ministry of Education',
+    location: 'Al-Aydabi, Jazan',
+    period: 'Dec 2025 – Jun 2026',
+    summary: 'Managed academic records and student results, prepared administrative reports, and supported electronic operations using Excel, Word, and Noor.',
+  },
+  {
+    role: 'Travel Operations Coordinator',
+    company: 'Saudia Airlines — Jazan',
+    location: 'Jazan',
+    period: 'May 2024 – Jul 2024',
+    summary: 'Reviewed travel and operational data, organized Excel records, compared competitive fares, and worked with Amadeus for reservation and travel data.',
+  },
+] as const;
+
+export const education = {
+  degree: 'Bachelor of Management Information Systems (MIS)',
+  university: 'Jazan University',
+  period: 'Nov 2025',
+  gpa: '4.38 / 5.00',
+  distinction: 'Second-Class Honors',
+} as const;
+
+export const certifications = [
+  { name: 'CAPM — Certified Associate in Project Management', provider: 'King Abdulaziz University', period: 'Nov 2023 · 23 hours' },
+  { name: 'Data Fundamentals and Analysis', provider: 'IBM SkillsBuild', period: 'Oct 2024' },
+  { name: 'Data Analysis with Power BI', provider: 'Digital Donation Initiative', period: 'Aug 2025' },
+  { name: 'First Data Journey: Introduction to Data Analysis', provider: 'Tharaa Training', period: 'Jul 2025 · 15 hours' },
 ] as const;
 
 export type StatItem = {
