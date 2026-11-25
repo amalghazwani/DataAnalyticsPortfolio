@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowUpRight, BarChart3, BriefcaseBusiness, Check, Database, FileSpreadsheet, Github, GraduationCap, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { profile, skills, timeline, projects } from './data/content';
 import { translations, type Language } from './data/translations';
@@ -136,7 +137,7 @@ export default function App() {
                 <span className="h-1.5 w-1.5 rounded-full bg-[#7fa5bf] shadow-[0_0_12px_#7fa5bf]" />
                 {isArabic ? 'محللة بيانات • ملف أعمال' : 'Data Analyst • Portfolio'}
               </div>
-              <h1 className="max-w-4xl font-display text-[clamp(3.2rem,9vw,7.2rem)] font-medium leading-[.88] tracking-[-.055em] text-white">
+              <h1 className="max-w-4xl font-display text-[clamp(2.7rem,9vw,7.2rem)] font-medium leading-[.92] tracking-[-.055em] text-white sm:text-[clamp(3.2rem,9vw,7.2rem)]">
                 Amal <span className="text-[#8fb0c8]">Ghazwani</span>
               </h1>
               <p className="mt-7 max-w-2xl text-[15px] leading-8 text-slate-300 sm:text-lg">{t.hero.tagline}</p>
@@ -195,7 +196,7 @@ export default function App() {
               <div className="space-y-7 md:space-y-10">
                 {timeline.map((item, index) => (
                   <article key={item.date + item.title} className="relative grid md:grid-cols-2">
-                    <div className={index % 2 === 0 ? 'relative md:pr-16' : 'relative md:col-start-2 md:pl-16'}>
+                    <div className={index % 2 === 0 ? 'relative md:pe-16' : 'relative md:col-start-2 md:ps-16'}>
                       <div className="rounded-2xl border border-white bg-white p-6 shadow-[0_10px_35px_rgba(22,43,61,0.06)]">
                         <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: blue }}>
                           <span>{item.date}</span><span className="h-px w-8 bg-[#b7cad8]" /><span>{item.type}</span>
@@ -303,7 +304,7 @@ export default function App() {
         </div>
       </footer>
 
-      {selectedProject && (
+      {selectedProject && createPortal(
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#030914]/90 p-4 backdrop-blur-md" onClick={() => setSelectedProject(null)} role="dialog" aria-modal="true">
           <div className="relative max-h-[92vh] w-full max-w-5xl overflow-auto rounded-3xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#071526]/90 text-white" aria-label="Close project preview"><X size={18} /></button>
@@ -311,6 +312,7 @@ export default function App() {
             <div className="p-7 sm:p-9"><p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: blue }}>{selectedProject.tools.join(' • ')}</p><h3 className="mt-3 font-display text-3xl text-slate-950">{selectedProject.name}</h3><p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{selectedProject.description}</p></div>
           </div>
         </div>
+        , document.body
       )}
 
       <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-600 shadow-lg backdrop-blur hover:text-[#0b1d30]" aria-label="Back to top">↑</button>
