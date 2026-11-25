@@ -75,7 +75,7 @@ export default function Hero({
 
         <div
           aria-hidden="true"
-          className="mt-10 h-1 w-32 rounded-full bg-accent opacity-100 shadow-glow"
+          className="mt-10 h-1 w-48 rounded-full bg-accent opacity-100 shadow-glow"
         />
       </div>
     </section>
