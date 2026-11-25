@@ -13,3 +13,34 @@
   :focus-visible { outline: 2px solid #5A86A8; outline-offset: 3px; }
 }
 @layer utilities { .font-display { font-family: 'Playfair Display', Georgia, serif; } }
+
+
+/* Theme + calm navigation */
+html[data-theme='light'] body { background: #f5f7fa; color: #0f172a; }
+html[data-theme='light'] .theme-surface { background: #f5f7fa; }
+html[data-theme='light'] header nav { background: rgba(255,255,255,.88) !important; border-color: rgba(15,23,42,.08) !important; box-shadow: 0 14px 45px rgba(15,32,50,.08) !important; }
+html[data-theme='light'] header nav .text-white { color: #0f172a !important; }
+html[data-theme='light'] header nav .text-[#a9bfd0] { color: #4f7897 !important; }
+html[data-theme='light'] header nav button { color: #0f172a !important; border-color: rgba(15,23,42,.1) !important; background: rgba(255,255,255,.75) !important; }
+html[data-theme='light'] header nav button:hover { background: #edf3f7 !important; }
+html[data-theme='light'] header nav > div:last-of-type button { color: #0f172a !important; }
+html[data-theme='light'] header nav > div:last-of-type button:hover { color: #0b1d30 !important; }
+html[data-theme='light'] #home { background: #f3f6fa !important; color: #071526 !important; }
+html[data-theme='light'] #home .text-white { color: #071526 !important; }
+html[data-theme='light'] #home .text-slate-300 { color: #526273 !important; }
+html[data-theme='light'] #home .text-slate-500 { color: #64748b !important; }
+html[data-theme='light'] #home .border-white\/10 { border-color: rgba(15,32,50,.1) !important; }
+html[data-theme='light'] #home .bg-white\/\[0\.04\] { background: rgba(255,255,255,.7) !important; }
+html[data-theme='light'] #home .bg-white\/\[0\.05\] { background: rgba(255,255,255,.7) !important; }
+html[data-theme='light'] #home .border-white\/20 { border-color: rgba(15,32,50,.18) !important; }
+html[data-theme='light'] #home .bg-white { background: #071526 !important; color: white !important; }
+html[data-theme='light'] #home .absolute.inset-0 { opacity: .28; }
+html[data-theme='light'] #process { background: #eef3f7 !important; color: #0f172a !important; }
+html[data-theme='light'] #process .text-white { color: #0f172a !important; }
+html[data-theme='light'] #process .text-slate-400 { color: #64748b !important; }
+html[data-theme='light'] #process .bg-\[\#071526\] { background: #eef3f7 !important; }
+html[data-theme='light'] footer { background: #0b1d30 !important; }
+@media (max-width: 640px) {
+  #home h1 { font-size: clamp(2.45rem, 13vw, 4rem); }
+  #home .min-h-\[310px\] { min-height: 300px; }
+}
