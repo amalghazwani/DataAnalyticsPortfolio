@@ -8,6 +8,42 @@ type HeroTranslations = {
   contact: string;
 };
 
+function MagneticButton({
+  children,
+  href,
+  primary = false,
+}: {
+  children: React.ReactNode;
+  href: string;
+  primary?: boolean;
+}) {
+  const handleMove = (event: React.PointerEvent<HTMLAnchorElement>) => {
+    if (event.pointerType !== 'mouse') return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 10;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 8;
+    event.currentTarget.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  const handleLeave = (event: React.PointerEvent<HTMLAnchorElement>) => {
+    event.currentTarget.style.transform = '';
+  };
+
+  return (
+    <a
+      href={href}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      className={primary
+        ? 'group relative inline-flex min-w-[180px] items-center justify-center gap-3 overflow-hidden rounded-full bg-[#5A86A8] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(90,134,168,0.18)] transition-[transform,background-color,box-shadow] duration-200 hover:bg-[#6B96B5] hover:shadow-[0_12px_34px_rgba(90,134,168,0.28)] sm:min-w-0 sm:px-8'
+        : 'inline-flex min-w-[180px] items-center justify-center rounded-full border border-[#5A86A8]/45 bg-white px-7 py-3.5 text-sm font-semibold text-ink-deep shadow-sm transition-[transform,background-color,border-color,box-shadow] duration-200 hover:border-[#5A86A8]/70 hover:bg-[#F5F7F9] hover:shadow-[0_10px_28px_rgba(90,134,168,0.14)] sm:min-w-0 sm:px-8'}
+    >
+      {primary && <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />}
+      <span className="relative">{children}</span>
+    </a>
+  );
+}
+
 export default function Hero({ translations }: { translations: HeroTranslations }) {
   const { ref, visible } = useReveal<HTMLDivElement>();
 
@@ -37,21 +73,14 @@ export default function Hero({ translations }: { translations: HeroTranslations 
             className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-9 sm:flex-row sm:gap-4 md:mt-10"
             style={{ animation: visible ? 'hero-actions-in 0.9s ease-out 0.38s both' : 'none' }}
           >
-            <a
-              href="#projects"
-              className="group relative inline-flex min-w-[180px] items-center justify-center gap-3 overflow-hidden rounded-full bg-[#5A86A8] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(90,134,168,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6B96B5] hover:shadow-[0_12px_34px_rgba(90,134,168,0.28)] sm:min-w-0 sm:px-8"
-            >
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              <span className="relative">{translations.projects}</span>
-              <ArrowRight size={17} className="transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-            </a>
+            <MagneticButton href="#projects" primary>
+              {translations.projects}
+              <ArrowRight size={17} className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+            </MagneticButton>
 
-            <a
-              href="#contact"
-              className="inline-flex min-w-[180px] items-center justify-center rounded-full border border-[#5A86A8]/45 bg-white px-7 py-3.5 text-sm font-semibold text-ink-deep shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5A86A8]/70 hover:bg-[#F5F7F9] hover:shadow-[0_10px_28px_rgba(90,134,168,0.14)] sm:min-w-0 sm:px-8"
-            >
-              <span className="relative">{translations.contact}</span>
-            </a>
+            <MagneticButton href="#contact">
+              {translations.contact}
+            </MagneticButton>
           </div>
         </div>
       </div>
@@ -70,4 +99,3 @@ export default function Hero({ translations }: { translations: HeroTranslations 
     </section>
   );
 }
-
