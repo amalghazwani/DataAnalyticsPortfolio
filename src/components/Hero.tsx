@@ -23,17 +23,17 @@ export default function Hero({ translations }: { translations: HeroTranslations 
             {translations.tagline}
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-4">
             <a
               href="#projects"
-              className="group inline-flex items-center justify-center gap-3 rounded-lg bg-white px-6 py-3.5 text-sm font-semibold text-ink-deep shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F2F4F7] hover:shadow-card sm:px-7"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#5A86A8] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(90,134,168,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6B96B5] hover:shadow-[0_12px_34px_rgba(90,134,168,0.28)] sm:px-8"
             >
               {translations.projects}
               <ArrowRight size={17} className="transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-lg border border-white/80 bg-white px-6 py-3.5 text-sm font-semibold text-ink-deep shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F2F4F7] hover:shadow-card sm:px-7"
+              className="inline-flex items-center justify-center rounded-full border border-[#5A86A8]/45 bg-white px-7 py-3.5 text-sm font-semibold text-ink-deep shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5A86A8]/70 hover:bg-[#F5F7F9] hover:shadow-[0_10px_28px_rgba(90,134,168,0.14)] sm:px-8"
             >
               {translations.contact}
             </a>
