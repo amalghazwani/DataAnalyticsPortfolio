@@ -12,10 +12,10 @@ export default {
           line: '#1C2A40',
         },
         accent: {
-          DEFAULT: '#4EA3FF',
-          dark: '#347FCB',
-          light: '#72B8FF',
-          muted: '#6F8EAD',
+          DEFAULT: '#5A86A8',
+          dark: '#456C88',
+          light: '#7A9CB7',
+          muted: '#6C8498',
         },
         text: {
           DEFAULT: '#F2F5FA',
@@ -30,7 +30,7 @@ export default {
       boxShadow: {
         card: '0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 34px rgba(0, 0, 0, 0.24)',
         cardHover: '0 2px 5px rgba(0, 0, 0, 0.42), 0 20px 55px rgba(0, 0, 0, 0.38)',
-        glow: '0 0 0 1px rgba(78, 163, 255, 0.18), 0 10px 34px rgba(78, 163, 255, 0.14)',
+        glow: '0 0 0 1px rgba(90, 134, 168, 0.18), 0 10px 34px rgba(90, 134, 168, 0.14)',
       },
     },
   },
