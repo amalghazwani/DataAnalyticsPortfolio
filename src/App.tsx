@@ -255,7 +255,7 @@ export default function App() {
               {localizedProjects.map((project, index) => (
                 <article key={project.name} className={index === 0 ? 'group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_12px_40px_rgba(15,32,50,0.055)] lg:col-span-2 lg:grid lg:grid-cols-[1.12fr_.88fr]' : 'group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_12px_40px_rgba(15,32,50,0.055)]'}>
                   <button onClick={() => setSelectedProject(project)} className={index === 0 ? 'relative block min-h-full w-full overflow-hidden bg-[#0b1d30] text-start aspect-[16/8] lg:aspect-auto' : 'relative block aspect-[16/9] w-full overflow-hidden bg-[#0b1d30] text-start'}>
-                    <img src={`${import.meta.env.BASE_URL}${(project.image ?? '').replace(/^\\/+/, '')}`} alt={project.name} loading="lazy" className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-[1.025] group-hover:opacity-100" />
+                    <img src={`${import.meta.env.BASE_URL}${(project.image ?? '').replace(/^\/+/, '')}`} alt={project.name} loading="lazy" className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-[1.025] group-hover:opacity-100" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071526]/65 via-transparent to-transparent" />
                     <span className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.17em] text-[#0b1d30]">{project.tools[0]} <ArrowUpRight size={12} /></span>
                   </button>
