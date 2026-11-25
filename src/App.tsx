@@ -107,7 +107,7 @@ export default function App() {
               <button onClick={() => setLanguage('en')} className={language === 'en' ? 'rounded-full bg-[#0b1d30] px-2.5 py-1.5 text-[9px] font-bold text-white' : 'rounded-full px-2.5 py-1.5 text-[9px] font-bold text-slate-500'}>EN</button>
               <button onClick={() => setLanguage('ar')} className={language === 'ar' ? 'rounded-full bg-[#0b1d30] px-2.5 py-1.5 text-[9px] font-bold text-white' : 'rounded-full px-2.5 py-1.5 text-[9px] font-bold text-slate-500'}>AR</button>
             </div>
-            <button onClick={() => setMenuOpen((v) => !v)} className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden" aria-label="Menu">{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
+            <button onClick={() => setMenuOpen((v) => !v)} className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden" aria-label={isArabic ? 'القائمة' : 'Menu'}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
           </div>
 
           {menuOpen && (
@@ -307,7 +307,7 @@ export default function App() {
       {selectedProject && createPortal(
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#030914]/90 p-4 backdrop-blur-md" onClick={() => setSelectedProject(null)} role="dialog" aria-modal="true">
           <div className="relative max-h-[92vh] w-full max-w-5xl overflow-auto rounded-3xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#071526]/90 text-white" aria-label="Close project preview"><X size={18} /></button>
+            <button onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#071526]/90 text-white" aria-label={isArabic ? 'إغلاق معاينة المشروع' : 'Close project preview'}><X size={18} /></button>
             <img src={import.meta.env.BASE_URL + (selectedProject.image?.replace(/^\\/+/, '') ?? '')} alt={selectedProject.name} className="max-h-[70vh] w-full object-contain bg-[#071526]" />
             <div className="p-7 sm:p-9"><p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: blue }}>{selectedProject.tools.join(' • ')}</p><h3 className="mt-3 font-display text-3xl text-slate-950">{selectedProject.name}</h3><p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{selectedProject.description}</p></div>
           </div>
@@ -315,7 +315,7 @@ export default function App() {
         , document.body
       )}
 
-      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-600 shadow-lg backdrop-blur hover:text-[#0b1d30]" aria-label="Back to top">↑</button>
+      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-600 shadow-lg backdrop-blur hover:text-[#0b1d30]" aria-label={isArabic ? 'العودة للأعلى' : 'Back to top'}>↑</button>
     </div>
   );
 }
