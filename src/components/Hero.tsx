@@ -55,6 +55,18 @@ export default function Hero({ translations }: { translations: HeroTranslations 
           </div>
         </div>
       </div>
+      <style>{`
+        @keyframes hero-line-in {
+          0% { transform: scaleX(0.15); opacity: 0; }
+          60% { opacity: 1; }
+          100% { transform: scaleX(1); opacity: 0.75; }
+        }
+        @keyframes hero-actions-in {
+          from { transform: translateY(10px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+      `}</style>
     </section>
   );
 }
