@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
-import { BriefcaseBusiness, GraduationCap, Award } from 'lucide-react';
-import { education, experience, certifications } from '../data/content';
+import { BriefcaseBusiness, GraduationCap, Award, FolderKanban } from 'lucide-react';
+import { timeline } from '../data/content';
 import type { Language } from '../data/translations';
 import { SectionHeading, useReveal } from './Section';
 
 type ExperienceTranslations = {
   eyebrow: string;
   title: string;
-  education: string;
-  degree: string;
-  gpa: string;
-  honors: string;
-  certifications: string;
 };
+
+const iconMap = {
+  experience: BriefcaseBusiness,
+  education: GraduationCap,
+  certification: Award,
+  project: FolderKanban,
+} as const;
 
 export default function Experience({ translations, language }: { translations: ExperienceTranslations; language: Language }) {
   const isArabic = language === 'ar';
@@ -22,10 +24,12 @@ export default function Experience({ translations, language }: { translations: E
   useEffect(() => {
     const items = Array.from(document.querySelectorAll<HTMLElement>('[data-timeline-item]'));
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) setActiveIndex(Number(entry.target.getAttribute('data-timeline-item')));
-      }),
-      { rootMargin: '-35% 0px -45% 0px', threshold: 0 }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveIndex(Number(entry.target.getAttribute('data-timeline-item')));
+        });
+      },
+      { rootMargin: '-38% 0px -42% 0px', threshold: 0 }
     );
     items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
@@ -37,62 +41,58 @@ export default function Experience({ translations, language }: { translations: E
         <div className={`transition-all duration-700 ease-out ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
           <SectionHeading eyebrow={translations.eyebrow} title={translations.title} />
 
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="mx-auto max-w-4xl">
             <div className="relative">
-              <div className="absolute bottom-4 left-[15px] top-4 w-px bg-gradient-to-b from-accent/20 via-accent/55 to-accent/20 rtl:left-auto rtl:right-[15px]" />
-              <div className="space-y-7">
-                {[...experience].reverse().map((item, index) => (
-                  <article data-timeline-item={index} key={item.company} className="group relative pl-12 rtl:pl-0 rtl:pr-12">
-                    <div className={`absolute left-[8px] top-2 h-[15px] w-[15px] rounded-full border-2 ${activeIndex === index ? 'border-accent bg-accent shadow-[0_0_0_6px_rgba(90,134,168,0.12)] scale-125' : 'border-accent/50 bg-ink shadow-[0_0_0_5px_rgba(90,134,168,0.06)]'} transition-all duration-300 group-hover:scale-125 group-hover:bg-accent rtl:left-auto rtl:right-[8px]`} />
-                    <div className="rounded-2xl border border-ink-line bg-ink-card/55 p-5 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-accent/35 group-hover:shadow-card">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-[10px] font-semibold tracking-[0.16em] text-accent">{item.period}</span>
-                        <BriefcaseBusiness size={16} className="text-accent" />
+              <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-accent/45 to-transparent md:block" />
+
+              <div className="space-y-10 md:space-y-14">
+                {timeline.map((item, index) => {
+                  const Icon = iconMap[item.type];
+                  const active = activeIndex === index;
+                  const side = index % 2 === 0 ? 'left' : 'right';
+
+                  return (
+                    <article
+                      key={item.date + item.title}
+                      data-timeline-item={index}
+                      className="relative grid items-center md:grid-cols-2 md:min-h-[170px]"
+                    >
+                      <div className={`relative ${side === 'left' ? 'md:pr-16 md:text-right' : 'md:col-start-2 md:pl-16'}`}>
+                        <div
+                          className={`rounded-2xl border bg-ink-card/55 p-5 transition-all duration-500 ${active ? 'border-accent/45 shadow-[0_16px_50px_rgba(90,134,168,0.10)] -translate-y-1' : 'border-ink-line'}`}
+                        >
+                          <div className={`flex items-center gap-2 text-accent ${side === 'left' ? 'md:justify-end' : ''}`}>
+                            <span className="text-[10px] font-semibold tracking-[0.18em]">{item.date}</span>
+                            <Icon size={15} className={active ? 'opacity-100' : 'opacity-60'} />
+                          </div>
+
+                          <h3 className="mt-3 font-display text-xl font-medium leading-tight text-text">
+                            {isArabic ? item.titleAr : item.title}
+                          </h3>
+
+                          <p className="mt-2 text-xs font-semibold text-accent-light">
+                            {isArabic ? item.detailAr : item.detail}
+                          </p>
+
+                          {'summary' in item && item.summary && (
+                            <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                              {isArabic ? item.summaryAr : item.summary}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <h3 className="mt-3 font-display text-xl font-medium text-text">{isArabic ? item.roleAr : item.role}</h3>
-                      <p className="mt-1 text-sm font-semibold text-accent-light">{item.company}</p>
-                      <p className="mt-3 text-sm leading-relaxed text-text-muted">{isArabic ? item.summaryAr : item.summary}</p>
-                    </div>
-                  </article>
-                ))}
+
+                      <div
+                        className={`absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 md:flex h-11 w-11 items-center justify-center rounded-full border bg-ink transition-all duration-500 ${active ? 'border-accent bg-accent/10 shadow-[0_0_0_8px_rgba(90,134,168,0.09),0_0_28px_rgba(90,134,168,0.20)] scale-110' : 'border-accent/35'}`}
+                      >
+                        <span className={`h-2.5 w-2.5 rounded-full transition-all duration-500 ${active ? 'bg-accent scale-125' : 'bg-accent/45'}`} />
+                      </div>
+
+                      <div className="hidden md:block" />
+                    </article>
+                  );
+                })}
               </div>
-            </div>
-
-            <div className="space-y-4">
-              <article className="rounded-2xl border border-ink-line bg-ink-card/55 p-6">
-                <div className="flex items-center gap-3 text-accent">
-                  <GraduationCap size={19} />
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">{translations.education}</span>
-                </div>
-                <h3 className="mt-4 font-display text-xl font-medium leading-tight text-text">{translations.degree}</h3>
-                <p className="mt-2 text-sm font-semibold text-accent-light">{education.university}</p>
-                <p className="mt-1 text-xs text-text-faint">{education.period}</p>
-                <div className="mt-5 grid grid-cols-2 gap-2">
-                  <div className="rounded-xl border border-ink-line bg-ink/30 p-3">
-                    <span className="block text-[9px] uppercase tracking-wider text-text-faint">{translations.gpa}</span>
-                    <span className="mt-1 block text-sm font-bold text-text">{education.gpa}</span>
-                  </div>
-                  <div className="rounded-xl border border-ink-line bg-ink/30 p-3">
-                    <span className="block text-[9px] uppercase tracking-wider text-text-faint">{translations.honors}</span>
-                    <span className="mt-1 block text-sm font-bold text-text">{education.distinction}</span>
-                  </div>
-                </div>
-              </article>
-
-              <article className="rounded-2xl border border-ink-line bg-ink-card/55 p-6">
-                <div className="flex items-center gap-3 text-accent">
-                  <Award size={18} />
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em]">{translations.certifications}</span>
-                </div>
-                <div className="mt-4 space-y-3">
-                  {certifications.map((item) => (
-                    <div key={item.name} className="border-l border-accent/30 pl-3 rtl:border-l-0 rtl:border-r rtl:pl-0 rtl:pr-3">
-                      <p className="text-xs font-semibold leading-relaxed text-text">{isArabic ? item.name : item.name}</p>
-                      <p className="mt-0.5 text-[10px] text-text-faint">{item.provider} · {item.period}</p>
-                    </div>
-                  ))}
-                </div>
-              </article>
             </div>
           </div>
         </div>
