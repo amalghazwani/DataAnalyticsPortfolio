@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 
 export default function Intro() {
-  const [visible, setVisible] = useState(true);\n  const [exiting, setExiting] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    const fadeTimer = window.setTimeout(() => setExiting(true), 1150);\n    const removeTimer = window.setTimeout(() => setVisible(false), 1500);
-    return () => {\n      window.clearTimeout(fadeTimer);\n      window.clearTimeout(removeTimer);\n    };
+    const fadeTimer = window.setTimeout(() => setExiting(true), 1150);
+    const removeTimer = window.setTimeout(() => setVisible(false), 1500);
+    return () => {
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(removeTimer);
+    };
   }, []);
 
   if (!visible) return null;
