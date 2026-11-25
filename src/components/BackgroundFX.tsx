@@ -4,22 +4,22 @@ export default function BackgroundFX() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#050912]"
       aria-hidden="true"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_24%,rgba(78,163,255,0.11),transparent_32%),radial-gradient(circle_at_88%_18%,rgba(31,92,150,0.14),transparent_36%),radial-gradient(circle_at_14%_72%,rgba(21,59,104,0.12),transparent_34%),linear-gradient(135deg,#050912_0%,#081221_52%,#050912_100%)]" />
-      <div className="absolute left-[54%] top-[8%] h-[500px] w-[720px] -translate-x-1/2 rounded-full bg-[#4EA3FF]/[0.08] blur-[150px]" style={{ animation: 'background-glow-a 16s ease-in-out infinite alternate' }} />
-      <div className="absolute -right-[12%] top-[14%] h-[520px] w-[520px] rounded-full bg-[#1E5D94]/[0.10] blur-[150px]" style={{ animation: 'background-glow-b 20s ease-in-out infinite alternate' }} />
-      <div className="absolute -left-[12%] bottom-[8%] h-[430px] w-[430px] rounded-full bg-[#163D69]/[0.10] blur-[150px]" style={{ animation: 'background-glow-c 18s ease-in-out infinite alternate' }} />
-      <svg className="absolute inset-0 h-full w-full opacity-[0.20]" viewBox="0 0 1600 900" preserveAspectRatio="none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_24%,rgba(90,134,168,0.09),transparent_32%),radial-gradient(circle_at_88%_18%,rgba(31,92,150,0.11),transparent_36%),radial-gradient(circle_at_14%_72%,rgba(21,59,104,0.10),transparent_34%),linear-gradient(135deg,#050912_0%,#081221_52%,#050912_100%)]" />
+      <div className="absolute left-[54%] top-[8%] h-[500px] w-[720px] -translate-x-1/2 rounded-full bg-[#5A86A8]/[0.055] blur-[150px]" style={{ animation: 'background-glow-a 16s ease-in-out infinite alternate' }} />
+      <div className="absolute -right-[12%] top-[14%] h-[520px] w-[520px] rounded-full bg-[#1E5D94]/[0.08] blur-[150px]" style={{ animation: 'background-glow-b 20s ease-in-out infinite alternate' }} />
+      <div className="absolute -left-[12%] bottom-[8%] h-[430px] w-[430px] rounded-full bg-[#163D69]/[0.08] blur-[150px]" style={{ animation: 'background-glow-c 18s ease-in-out infinite alternate' }} />
+      <svg className="absolute inset-0 h-full w-full opacity-[0.16]" viewBox="0 0 1600 900" preserveAspectRatio="none">
         <defs>
           <linearGradient id="wave-gradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#4EA3FF" stopOpacity="0" />
-            <stop offset="38%" stopColor="#4EA3FF" stopOpacity="0.24" />
-            <stop offset="58%" stopColor="#72B8FF" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#4EA3FF" stopOpacity="0" />
+            <stop offset="0%" stopColor="#5A86A8" stopOpacity="0" />
+            <stop offset="38%" stopColor="#5A86A8" stopOpacity="0.18" />
+            <stop offset="58%" stopColor="#7A9CB7" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#5A86A8" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="wave-gradient-2" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#2A6A9D" stopOpacity="0" />
-            <stop offset="45%" stopColor="#4EA3FF" stopOpacity="0.14" />
-            <stop offset="70%" stopColor="#72B8FF" stopOpacity="0.16" />
+            <stop offset="45%" stopColor="#5A86A8" stopOpacity="0.11" />
+            <stop offset="70%" stopColor="#7A9CB7" stopOpacity="0.12" />
             <stop offset="100%" stopColor="#2A6A9D" stopOpacity="0" />
           </linearGradient>
         </defs>
