@@ -308,7 +308,7 @@ export default function App() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#030914]/90 p-4 backdrop-blur-md" onClick={() => setSelectedProject(null)} role="dialog" aria-modal="true">
           <div className="relative max-h-[92vh] w-full max-w-5xl overflow-auto rounded-3xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#071526]/90 text-white" aria-label={isArabic ? 'إغلاق معاينة المشروع' : 'Close project preview'}><X size={18} /></button>
-            <img src={import.meta.env.BASE_URL + (selectedProject.image?.replace(/^\\/+/, '') ?? '')} alt={selectedProject.name} className="max-h-[70vh] w-full object-contain bg-[#071526]" />
+            <img src={import.meta.env.BASE_URL + (selectedProject.image?.replace(/^\/+/, '') ?? '')} alt={selectedProject.name} className="max-h-[70vh] w-full object-contain bg-[#071526]" />
             <div className="p-7 sm:p-9"><p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: blue }}>{selectedProject.tools.join(' • ')}</p><h3 className="mt-3 font-display text-3xl text-slate-950">{selectedProject.name}</h3><p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{selectedProject.description}</p></div>
           </div>
         </div>
