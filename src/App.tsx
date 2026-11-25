@@ -3,6 +3,7 @@ import BackgroundFX from './components/BackgroundFX';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Process from './components/Process';
 import Projects from './components/Projects';
@@ -36,6 +37,7 @@ export default function App() {
         <main>
           <Hero translations={t.hero} />
           <About translations={t.about} />
+          <Experience translations={t.experience} />
           <Skills translations={t.skills} />
           <Process translations={t.process} />
           <Projects translations={t.projects} />
