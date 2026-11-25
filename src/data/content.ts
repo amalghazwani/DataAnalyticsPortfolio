@@ -24,6 +24,8 @@ export const experience = [
     location: 'Al-Aydabi, Jazan',
     period: 'Dec 2025 – Jun 2026',
     summary: 'Managed academic records and student results, prepared administrative reports, and supported electronic operations using Excel, Word, and Noor.',
+    roleAr: 'أخصائية أداء مؤسسي',
+    summaryAr: 'إدارة السجلات الأكاديمية ونتائج الطالبات، وإعداد التقارير الإدارية، ودعم العمليات الإلكترونية باستخدام Excel وWord ونظام نور.',
   },
   {
     role: 'Travel Operations Coordinator',
@@ -31,6 +33,8 @@ export const experience = [
     location: 'Jazan',
     period: 'May 2024 – Jul 2024',
     summary: 'Reviewed travel and operational data, organized Excel records, compared competitive fares, and worked with Amadeus for reservation and travel data.',
+    roleAr: 'منسقة عمليات سفر',
+    summaryAr: 'مراجعة بيانات الرحلات والعمليات، وتنظيم سجلات Excel، ومقارنة الأسعار التنافسية، والتعامل مع نظام Amadeus لبيانات الحجوزات والسفر.'
   },
 ] as const;
 
