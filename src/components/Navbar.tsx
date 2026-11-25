@@ -6,6 +6,7 @@ type NavbarTranslations = {
   nav: {
     home: string;
     about: string;
+    experience: string;
     skills: string;
     process: string;
     projects: string;
@@ -22,6 +23,7 @@ type NavbarProps = {
 const navItems = [
   { key: 'home', href: '#home' },
   { key: 'about', href: '#about' },
+  { key: 'experience', href: '#experience' },
   { key: 'skills', href: '#skills' },
   { key: 'process', href: '#process' },
   { key: 'projects', href: '#projects' },
