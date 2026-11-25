@@ -15,7 +15,7 @@ export default function Hero({ translations }: { translations: HeroTranslations 
     <section id="home" className="relative overflow-hidden px-6 pb-24 pt-28 sm:px-8 sm:pb-28 sm:pt-32 lg:px-12 lg:pb-32 lg:pt-36">
       <div ref={ref} className="container-wide relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className={`max-w-3xl transition-all duration-900 ease-out ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <h1 className="font-display text-[clamp(3.2rem,8vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.055em] text-text">
+          <h1 className="whitespace-nowrap font-display text-[clamp(3rem,7vw,6.5rem)] font-medium leading-[0.9] tracking-[-0.055em] text-text">
             {translations.name}
           </h1>
 
