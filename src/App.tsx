@@ -1,10 +1,20 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowUpRight, BarChart3, BriefcaseBusiness, Database, FileSpreadsheet, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
-import { profile, skills, timeline, projects } from './data/content';
+import { ArrowLeft, ArrowUpRight, BarChart3, Database, FileSpreadsheet, Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { profile, skills, timeline, projects, type Project } from './data/content';
 import { translations, type Language } from './data/translations';
 
-const blue = '#78B7C8';
-const violet = '#9B8CFF';
+const pages = ['home', 'about', 'experience', 'skills', 'process', 'projects', 'contact'] as const;
+type Page = typeof pages[number];
+
+const pageNames: Record<Page, { en: string; ar: string }> = {
+  home: { en: 'Home', ar: 'الرئيسية' },
+  about: { en: 'About', ar: 'نبذة' },
+  experience: { en: 'Experience', ar: 'الخبرات' },
+  skills: { en: 'Skills', ar: 'المهارات' },
+  process: { en: 'How I Work', ar: 'طريقة عملي' },
+  projects: { en: 'Projects', ar: 'المشاريع' },
+  contact: { en: 'Contact', ar: 'تواصل' },
+};
 
 const projectArabic: Record<string, { name: string; description: string; labels: Record<string, string> }> = {
   'Retail Sales Performance Analysis': {
@@ -24,22 +34,17 @@ const projectArabic: Record<string, { name: string; description: string; labels:
   },
 };
 
-const pages = ['home','about','experience','skills','projects','process','contact'] as const;
-type Page = typeof pages[number];
+function getRoute() {
+  const raw = window.location.hash.replace(/^#\/?/, '');
+  const [page, slug] = raw.split('/');
+  return {
+    page: (pages.includes(page as Page) ? page as Page : 'home'),
+    slug: slug || null,
+  };
+}
 
-const pageNames: Record<Page, { en: string; ar: string }> = {
-  home: { en:'Home', ar:'الرئيسية' },
-  about: { en:'About', ar:'نبذة' },
-  experience: { en:'Experience', ar:'الخبرات' },
-  skills: { en:'Skills', ar:'المهارات' },
-  projects: { en:'Projects', ar:'المشاريع' },
-  process: { en:'Process', ar:'المنهجية' },
-  contact: { en:'Contact', ar:'تواصل' },
-};
-
-function getPage(): Page {
-  const value = window.location.hash.replace('#/','').split('/')[0] as Page;
-  return pages.includes(value) ? value : 'home';
+function slugify(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
 function SectionTitle({ eyebrow, title, description, arabic }: { eyebrow: string; title: string; description?: string; arabic?: boolean }) {
@@ -54,140 +59,151 @@ function SectionTitle({ eyebrow, title, description, arabic }: { eyebrow: string
 
 export default function App() {
   const [language, setLanguage] = useState<Language>(() => {
-    try { const saved = localStorage.getItem('lang'); return saved === 'ar' ? 'ar' : 'en'; } catch { return 'en'; }
+    try { return localStorage.getItem('lang') === 'ar' ? 'ar' : 'en'; } catch { return 'en'; }
   });
-  const [page, setPage] = useState<Page>(getPage);
+  const [route, setRoute] = useState(getRoute);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
   const t = translations[language];
-  const isArabic = language === 'ar';
+  const arabic = language === 'ar';
 
   useEffect(() => {
-    const onHash = () => { setPage(getPage()); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'auto' }); };
+    const onHash = () => {
+      setRoute(getRoute());
+      setMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    document.documentElement.dir = arabic ? 'rtl' : 'ltr';
     document.documentElement.dataset.theme = 'dark';
-    document.title = isArabic ? 'أمل غزواني — محللة بيانات' : 'Amal Ghazwani — Data Analyst';
+    document.title = arabic ? 'أمل غزواني — محللة بيانات' : 'Amal Ghazwani — Data Analyst';
     try { localStorage.setItem('lang', language); } catch {}
-  }, [language, isArabic]);
+  }, [language, arabic]);
 
-  const localizedProjects = useMemo(() => projects.map((project) => {
+  const go = (page: Page, slug?: string) => {
+    window.location.hash = slug ? '#/' + page + '/' + slug : '#/' + page;
+    setMenuOpen(false);
+  };
+
+  const navItems = pages.map(key => ({ key, label: arabic ? pageNames[key].ar : pageNames[key].en }));
+
+  const localizedProjects = useMemo(() => projects.map(project => {
     const ar = projectArabic[project.name];
-    if (!isArabic || !ar) return project;
-    return { ...project, name: ar.name, description: ar.description, stats: project.stats?.map((stat) => ({ ...stat, label: ar.labels[stat.label] ?? stat.label })) };
-  }), [isArabic]);
+    if (!arabic || !ar) return project;
+    return {
+      ...project,
+      name: ar.name,
+      description: ar.description,
+      stats: project.stats?.map(stat => ({ ...stat, label: ar.labels[stat.label] ?? stat.label })),
+    };
+  }), [arabic]);
 
-  const go = (target: Page) => { setMenuOpen(false); window.location.hash = '#/' + target; };
-
-  const navItems = pages.map((key) => ({ key, label: isArabic ? pageNames[key].ar : pageNames[key].en }));
+  const activeProject = route.page === 'projects' && route.slug
+    ? localizedProjects.find(p => slugify(p.name) === route.slug || slugify(projects.find(x => x.name === p.name)?.name || '') === route.slug)
+    : null;
 
   return (
     <div className="site-shell">
       <header className="site-nav">
         <div className="nav-inner">
-          <button className="brand" onClick={() => go('home')}>
+          <button className="brand" onClick={() => go('home')} aria-label="Home">
             <span className="brand-mark">AG</span>
             <span className="brand-name">Amal Ghazwani</span>
           </button>
 
           <nav className="desktop-nav">
-            {navItems.map((item) => (
-              <button key={item.key} className={page === item.key ? 'nav-link active' : 'nav-link'} onClick={() => go(item.key)}>
+            {navItems.map(item => (
+              <button key={item.key} className={route.page === item.key ? 'nav-link active' : 'nav-link'} onClick={() => go(item.key)}>
                 {item.label}
               </button>
             ))}
           </nav>
 
           <div className="nav-actions">
-            <button className="language-toggle" onClick={() => setLanguage(isArabic ? 'en' : 'ar')}>{isArabic ? 'EN' : 'AR'}</button>
-            <button className="mobile-menu" onClick={() => setMenuOpen(v => !v)} aria-label="Menu">{menuOpen ? <X size={19}/> : <Menu size={19}/>}</button>
+            <button className="language-toggle" onClick={() => setLanguage(arabic ? 'en' : 'ar')}>{arabic ? 'EN' : 'AR'}</button>
+            <button className="mobile-menu" onClick={() => setMenuOpen(v => !v)} aria-label="Menu">{menuOpen ? <X size={20}/> : <Menu size={20}/>}</button>
           </div>
 
           {menuOpen && (
             <div className="mobile-panel">
-              {navItems.map(item => <button key={item.key} onClick={() => go(item.key)} className={page === item.key ? 'mobile-link active' : 'mobile-link'}>{item.label}</button>)}
+              {navItems.map(item => (
+                <button key={item.key} onClick={() => go(item.key)} className={route.page === item.key ? 'mobile-link active' : 'mobile-link'}>
+                  {item.label}
+                </button>
+              ))}
             </div>
           )}
         </div>
       </header>
 
       <main className="page-main">
-        {page === 'home' && <HomePage go={go} arabic={isArabic} t={t} />}
-        {page === 'about' && <AboutPage arabic={isArabic} t={t} />}
-        {page === 'experience' && <ExperiencePage arabic={isArabic} t={t} />}
-        {page === 'skills' && <SkillsPage arabic={isArabic} t={t} />}
-        {page === 'projects' && <ProjectsPage arabic={isArabic} t={t} projects={localizedProjects} onOpen={setSelectedProject} />}
-        {page === 'process' && <ProcessPage arabic={isArabic} t={t} />}
-        {page === 'contact' && <ContactPage arabic={isArabic} t={t} />}
+        {route.page === 'home' && <HomePage go={go} arabic={arabic} t={t} />}
+        {route.page === 'about' && <AboutPage arabic={arabic} t={t} />}
+        {route.page === 'experience' && <ExperiencePage arabic={arabic} t={t} />}
+        {route.page === 'skills' && <SkillsPage arabic={arabic} t={t} />}
+        {route.page === 'process' && <ProcessPage arabic={arabic} t={t} />}
+        {route.page === 'projects' && !activeProject && <ProjectsPage arabic={arabic} t={t} projects={localizedProjects} go={go} />}
+        {route.page === 'projects' && activeProject && <ProjectDetailPage arabic={arabic} project={activeProject} go={go} />}
+        {route.page === 'contact' && <ContactPage arabic={arabic} t={t} />}
       </main>
 
       <footer className="footer">
         <div><strong>Amal Ghazwani</strong><span>Data Analyst</span></div>
         <p>© {new Date().getFullYear()} {t.footer.copyright}</p>
       </footer>
-
-      {selectedProject && (
-        <div className="project-modal" onClick={() => setSelectedProject(null)}>
-          <div className="project-modal-card" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setSelectedProject(null)}><X size={19}/></button>
-            <img src={import.meta.env.BASE_URL + (selectedProject.image?.replace(/^\/+/, '') ?? '')} alt={selectedProject.name} />
-            <div className="modal-content">
-              <div className="tool-row">{selectedProject.tools.map(tool => <span key={tool}>{tool}</span>)}</div>
-              <h2>{selectedProject.name}</h2>
-              <p>{selectedProject.description}</p>
-              <div className="stats-grid">{selectedProject.stats?.map(stat => <div key={stat.label} className="stat"><small>{stat.label}</small><strong>{stat.value}</strong></div>)}</div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
 function HomePage({ go, arabic, t }: any) {
-  return <div className="home-page">
-    <section className="hero-page">
-      <div className="hero-glow glow-one"/><div className="hero-glow glow-two"/>
-      <div className="hero-grid"/>
-      <div className="hero-content">
-        <div className={arabic ? 'hero-copy rtl' : 'hero-copy'}>
-          <p className="eyebrow"><span/> {arabic ? 'محللة بيانات' : 'Data Analyst'}</p>
-          <h1>Amal <em>Ghazwani</em></h1>
-          <p className="hero-tagline">{t.hero.tagline}</p>
-          <div className="hero-buttons">
-            <button className="btn btn-primary" onClick={() => go('projects')}>{t.hero.projects}<ArrowUpRight size={15}/></button>
-            <button className="btn btn-outline" onClick={() => go('contact')}>{t.hero.contact}</button>
+  return (
+    <div className="home-page">
+      <section className="hero-page">
+        <div className="hero-grid"/>
+        <div className="hero-glow glow-one"/>
+        <div className="hero-glow glow-two"/>
+        <div className="hero-content">
+          <div className={arabic ? 'hero-copy rtl' : 'hero-copy'}>
+            <p className="eyebrow"><span/> {arabic ? 'محللة بيانات' : 'DATA ANALYST'}</p>
+            <h1>Amal Ghazwani</h1>
+            <p className="hero-tagline">{t.hero.tagline}</p>
+            <div className="hero-buttons">
+              <button className="btn btn-primary" onClick={() => go('projects')}>{t.hero.projects}<ArrowUpRight size={16}/></button>
+              <button className="btn btn-outline" onClick={() => go('contact')}>{t.hero.contact}</button>
+            </div>
+            <div className="hero-proof"><span>Excel</span><i/><span>Power BI</span><i/><span>Data Visualization</span></div>
           </div>
-          <div className="hero-proof"><span>Excel</span><i/> <span>Power BI</span><i/> <span>Data Visualization</span></div>
-        </div>
-        <HeroVisual/>
-      </div>
-      <button className="hero-scroll" onClick={() => go('about')}>Explore portfolio <span>↓</span></button>
-    </section>
-  </div>;
-}
 
-function HeroVisual() {
-  return <div className="hero-visual">
-    <div className="orbit orbit-a"/><div className="orbit orbit-b"/>
-    <div className="dashboard-card glass-card">
-      <div className="dash-head"><span>ANALYTICS OVERVIEW</span><b>● LIVE</b></div>
-      <div className="revenue"><div><small>Revenue</small><strong>$773.9K</strong></div><span>+12.4%</span></div>
-      <svg viewBox="0 0 430 190" className="chart" aria-label="Analytics chart">
-        <g className="chart-grid"><path d="M20 160H410M20 120H410M20 80H410M20 40H410"/></g>
-        {[55,80,108,76,132,102,151,119].map((h,i)=><rect key={i} x={35+i*48} y={165-h} width="22" height={h} rx="5" className="chart-bar"/>)}
-        <path d="M35 128 C85 110 100 126 130 95 S185 105 215 80 S265 92 300 58 S350 75 395 35" className="chart-line"/>
-      </svg>
-      <div className="dash-foot"><span>Performance</span><b>+18.6% YoY</b></div>
+          <div className="hero-side">
+            <div className="intro-panel">
+              <p className="panel-kicker">01 / PORTFOLIO</p>
+              <h2>{arabic ? 'تحليل واضح. تصوّر ذكي. قرارات أفضل.' : 'Clear analysis. Thoughtful visualization. Better decisions.'}</h2>
+              <p>{arabic ? 'أبني تحليلات ولوحات معلومات تركّز على السؤال المهم والنتيجة القابلة للاستخدام.' : 'I build analysis and dashboards around the question that matters and the outcome that can be used.'}</p>
+              <button className="text-link" onClick={() => go('about')}>{arabic ? 'اعرفي عني أكثر' : 'Learn more about me'} <ArrowUpRight size={15}/></button>
+            </div>
+            <div className="mini-metrics">
+              <div><span>01</span><strong>Excel</strong><small>Analysis</small></div>
+              <div><span>02</span><strong>Power BI</strong><small>Dashboards</small></div>
+              <div><span>03</span><strong>SQL</strong><small>Data</small></div>
+            </div>
+          </div>
+        </div>
+        <button className="hero-scroll" onClick={() => go('projects')}>{arabic ? 'استكشفي المشاريع' : 'Explore projects'} <span>↓</span></button>
+      </section>
+
+      <section className="home-strip">
+        <div className="home-strip-inner">
+          <p>{arabic ? 'مشاريع مختارة' : 'SELECTED WORK'}</p>
+          <div><span>Sales</span><span>Retail</span><span>Travel</span></div>
+          <button onClick={() => go('projects')}>{arabic ? 'عرض جميع المشاريع' : 'View all projects'} <ArrowUpRight size={15}/></button>
+        </div>
+      </section>
     </div>
-    <div className="float-card float-one"><small>Top Category</small><strong>Electronics</strong><span>42% of revenue</span></div>
-    <div className="float-card float-two"><small>Data Insight</small><strong>+18.6%</strong><span>YoY performance</span></div>
-  </div>;
+  );
 }
 
 function AboutPage({ arabic, t }: any) {
@@ -207,13 +223,7 @@ function ExperiencePage({ arabic, t }: any) {
 
 function SkillsPage({ arabic, t }: any) {
   return <PageFrame><SectionTitle arabic={arabic} eyebrow={t.skills.eyebrow} title={t.skills.title} description={arabic ? 'الأدوات والمهارات التي أستخدمها لتحويل البيانات إلى رؤى واضحة.' : 'The tools and skills I use to turn data into clear insights.'}/>
-    <div className="skills-page-grid">{skills.map((skill:string,i:number)=>{const Icon=[FileSpreadsheet,BarChart3,Database,BarChart3,BarChart3,BarChart3,FileSpreadsheet][i]??BarChart3;return <div className="skill-card-dark" key={skill}><span className="skill-no">0{i+1}</span><Icon size={20}/><h3>{skill}</h3><p>{arabic?'بيانات وتحليلات':'Data & Insights'}</p></div>})}</div>
-  </PageFrame>;
-}
-
-function ProjectsPage({ arabic, t, projects, onOpen }: any) {
-  return <PageFrame><SectionTitle arabic={arabic} eyebrow={t.projects.eyebrow} title={t.projects.title} description={arabic ? 'نماذج عملية من أعمال تحليل البيانات والتصور البصري.' : 'Selected work across sales, retail, and travel analytics.'}/>
-    <div className="projects-page-grid">{projects.map((project:any,i:number)=><article className="project-card-dark" key={project.name}><button className="project-image" onClick={()=>onOpen(project)}><img src={import.meta.env.BASE_URL + (project.image?.replace(/^\/+/, '') ?? '')} alt={project.name}/><span>View dashboard <ArrowUpRight size={13}/></span></button><div className="project-info"><div className="tool-row">{project.tools.map((tool:string)=><span key={tool}>{tool}</span>)}</div><p className="project-number">0{i+1}</p><h2>{project.name}</h2><p>{project.description}</p><div className="stats-grid">{project.stats?.slice(0,3).map((stat:any)=><div className="stat" key={stat.label}><small>{stat.label}</small><strong>{stat.value}</strong></div>)}</div><button className="case-link" onClick={()=>onOpen(project)}>View case study <ArrowUpRight size={14}/></button></div></article>)}</div>
+    <div className="skills-page-grid">{skills.map((skill:string,i:number)=>{const Icon=[FileSpreadsheet,BarChart3,Database,BarChart3,BarChart3,BarChart3,FileSpreadsheet][i] ?? BarChart3;return <div className="skill-card-dark" key={skill}><span className="skill-no">0{i+1}</span><Icon size={21}/><h3>{skill}</h3><p>{arabic ? 'بيانات وتحليلات' : 'Data & Insights'}</p></div>})}</div>
   </PageFrame>;
 }
 
@@ -223,10 +233,49 @@ function ProcessPage({ arabic, t }: any) {
   </PageFrame>;
 }
 
+function ProjectsPage({ arabic, t, projects, go }: any) {
+  return <PageFrame><SectionTitle arabic={arabic} eyebrow={t.projects.eyebrow} title={t.projects.title} description={arabic ? 'نماذج عملية من أعمال تحليل البيانات والتصور البصري.' : 'Selected work across sales, retail, and travel analytics.'}/>
+    <div className="projects-page-grid">{projects.map((project:Project,i:number)=><article className="project-card-dark" key={project.name}>
+      <button className="project-image" onClick={() => go('projects', slugify(project.name))}>
+        <img src={import.meta.env.BASE_URL + (project.image?.replace(/^\/+/, '') ?? '')} alt={project.name}/>
+        <span>{arabic ? 'عرض المشروع' : 'View project'} <ArrowUpRight size={14}/></span>
+      </button>
+      <div className="project-info">
+        <div className="tool-row">{project.tools.map(tool=><span key={tool}>{tool}</span>)}</div>
+        <p className="project-number">0{i+1}</p>
+        <h2>{project.name}</h2>
+        <p>{project.description}</p>
+        <div className="stats-grid">{project.stats?.slice(0,3).map(stat=><div className="stat" key={stat.label}><small>{stat.label}</small><strong>{stat.value}</strong></div>)}</div>
+        <button className="case-link" onClick={() => go('projects', slugify(project.name))}>{arabic ? 'فتح المشروع' : 'Open project'} <ArrowUpRight size={14}/></button>
+      </div>
+    </article>)}</div>
+  </PageFrame>;
+}
+
+function ProjectDetailPage({ arabic, project, go }: { arabic:boolean; project:Project; go:(page:Page)=>void }) {
+  return <PageFrame>
+    <button className="back-link" onClick={() => go('projects')}><ArrowLeft size={15}/> {arabic ? 'العودة للمشاريع' : 'Back to projects'}</button>
+    <div className="project-detail">
+      <div className="project-detail-copy">
+        <p className="eyebrow">{arabic ? 'مشروع' : 'PROJECT'}</p>
+        <div className="tool-row">{project.tools.map(tool=><span key={tool}>{tool}</span>)}</div>
+        <h1>{project.name}</h1>
+        <p className="detail-description">{project.description}</p>
+        <div className="stats-grid detail-stats">{project.stats?.map(stat=><div className="stat" key={stat.label}><small>{stat.label}</small><strong>{stat.value}</strong></div>)}</div>
+      </div>
+      <div className="project-detail-image"><img src={import.meta.env.BASE_URL + (project.image?.replace(/^\/+/, '') ?? '')} alt={project.name}/></div>
+    </div>
+  </PageFrame>;
+}
+
 function ContactPage({ arabic, t }: any) {
   return <PageFrame><SectionTitle arabic={arabic} eyebrow={t.contact.eyebrow} title={t.contact.title} description={t.contact.description}/>
     <div className="contact-page-grid">
-      {[[Mail,t.contact.email,profile.email,'mailto:'+profile.email],[Linkedin,t.contact.linkedin,'amal-ghazwani',profile.linkedin],[Github,t.contact.github,'amalghazwani',profile.github]].map(([Icon,label,value,href]:any)=><a className="contact-card-dark" key={String(label)} href={String(href)} target={String(href).startsWith('mailto:')?undefined:'_blank'} rel={String(href).startsWith('mailto:')?undefined:'noreferrer'}><span className="contact-icon"><Icon size={19}/></span><div><small>{String(label)}</small><strong>{String(value)}</strong></div><ArrowUpRight size={16}/></a>)}
+      {[[Mail,t.contact.email,profile.email,'mailto:'+profile.email],[Linkedin,t.contact.linkedin,'amal-ghazwani',profile.linkedin],[Github,t.contact.github,'amalghazwani',profile.github]].map(([Icon,label,value,href]:any)=>
+        <a className="contact-card-dark" key={String(label)} href={String(href)} target={String(href).startsWith('mailto:')?undefined:'_blank'} rel={String(href).startsWith('mailto:')?undefined:'noreferrer'}>
+          <span className="contact-icon"><Icon size={19}/></span><div><small>{String(label)}</small><strong>{String(value)}</strong></div><ArrowUpRight size={16}/>
+        </a>
+      )}
     </div>
   </PageFrame>;
 }
