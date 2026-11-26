@@ -63,7 +63,7 @@ export default function App() {
   const isArabic = language === 'ar';
 
   useEffect(() => {
-    const onHash = () => { setPage(getPage()); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); };
+    const onHash = () => { setPage(getPage()); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'auto' }); };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
