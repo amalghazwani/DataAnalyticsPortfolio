@@ -161,43 +161,45 @@ function HomePage({ go, arabic, t }: any) {
   return (
     <div className="home-page">
       <section className="hero-page">
-        <div className="hero-grid"/>
-        <div className="hero-glow glow-one"/>
-        <div className="hero-glow glow-two"/>
-        <div className="hero-content">
+        <div className="hero-grid" />
+        <div className="hero-glow glow-one" />
+        <div className="hero-content page-container">
           <div className={arabic ? 'hero-copy rtl' : 'hero-copy'}>
-            <p className="eyebrow"><span/> {arabic ? 'محللة بيانات' : 'DATA ANALYST'}</p>
+            <p className="eyebrow"><span />{arabic ? 'محللة بيانات' : 'DATA ANALYST'}</p>
             <h1>Amal Ghazwani</h1>
             <p className="hero-tagline">{t.hero.tagline}</p>
             <div className="hero-buttons">
               <button className="btn btn-primary" onClick={() => go('projects')}>{t.hero.projects}<ArrowUpRight size={16}/></button>
               <button className="btn btn-outline" onClick={() => go('contact')}>{t.hero.contact}</button>
             </div>
-            <div className="hero-proof"><span>Excel</span><i/><span>Power BI</span><i/><span>Data Visualization</span></div>
           </div>
 
-          <div className="hero-side">
-            <div className="intro-panel">
-              <p className="panel-kicker">01 / PORTFOLIO</p>
-              <h2>{arabic ? 'تحليل واضح. تصوّر ذكي. قرارات أفضل.' : 'Clear analysis. Thoughtful visualization. Better decisions.'}</h2>
-              <p>{arabic ? 'أبني تحليلات ولوحات معلومات تركّز على السؤال المهم والنتيجة القابلة للاستخدام.' : 'I build analysis and dashboards around the question that matters and the outcome that can be used.'}</p>
-              <button className="text-link" onClick={() => go('about')}>{arabic ? 'اعرفي عني أكثر' : 'Learn more about me'} <ArrowUpRight size={15}/></button>
-            </div>
-            <div className="mini-metrics">
-              <div><span>01</span><strong>Excel</strong><small>Analysis</small></div>
-              <div><span>02</span><strong>Power BI</strong><small>Dashboards</small></div>
-              <div><span>03</span><strong>SQL</strong><small>Data</small></div>
+          <div className="hero-visual" aria-hidden="true">
+            <div className="visual-frame">
+              <div className="visual-top"><span>DATA / 01</span><span>ANALYSIS</span></div>
+              <div className="visual-core">
+                <div className="orbit orbit-a"><i/><i/><i/></div>
+                <div className="orbit orbit-b"><i/><i/></div>
+                <div className="core-dot" />
+                <div className="signal signal-a"><span/><span/><span/><span/></div>
+                <div className="signal signal-b"><span/><span/><span/></div>
+              </div>
+              <div className="visual-bottom"><span>INSIGHT</span><span>CLARITY</span><span>DECISION</span></div>
             </div>
           </div>
         </div>
-        <button className="hero-scroll" onClick={() => go('projects')}>{arabic ? 'استكشفي المشاريع' : 'Explore projects'} <span>↓</span></button>
       </section>
 
-      <section className="home-strip">
-        <div className="home-strip-inner">
-          <p>{arabic ? 'مشاريع مختارة' : 'SELECTED WORK'}</p>
-          <div><span>Sales</span><span>Retail</span><span>Travel</span></div>
-          <button onClick={() => go('projects')}>{arabic ? 'عرض جميع المشاريع' : 'View all projects'} <ArrowUpRight size={15}/></button>
+      <section className="home-intro">
+        <div className="page-container intro-grid">
+          <div>
+            <p className="eyebrow"><span />{arabic ? 'نبذة' : 'A LITTLE ABOUT ME'}</p>
+            <h2>{arabic ? 'أحوّل البيانات إلى شيء واضح ومفيد.' : 'I turn data into something clear and useful.'}</h2>
+          </div>
+          <div>
+            <p>{arabic ? 'أستمتع باستكشاف البيانات، فهم الأنماط، وبناء تصورات تجعل النتائج أسهل في الفهم والاستخدام.' : 'I enjoy exploring data, understanding patterns, and building visualizations that make findings easier to understand and use.'}</p>
+            <button className="text-link" onClick={() => go('about')}>{arabic ? 'اعرفي عني أكثر' : 'More about me'} <ArrowUpRight size={15}/></button>
+          </div>
         </div>
       </section>
     </div>
