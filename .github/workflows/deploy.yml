@@ -55,3 +55,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+# Force Pages deployment from main after portfolio landing-page updates.
