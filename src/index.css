@@ -344,3 +344,32 @@ button { -webkit-tap-highlight-color:transparent; }
   .footer { display:block;padding-bottom:28px; }
   .footer p { margin-top:16px; }
 }
+
+/* Single-page landing layout */
+html { scroll-behavior:smooth; scroll-padding-top:74px; }
+.landing-main { padding-top:74px; }
+.landing-section { scroll-margin-top:74px; }
+.section-alt { background:#06101d; }
+.section-alt .page-title { margin-bottom:58px; }
+.landing-section.inner-page { min-height:auto; padding:110px 0 125px; }
+#home.hero-page { min-height:calc(100svh - 74px); }
+.landing-section .page-title h1 { max-width:100%; }
+.projects-page-grid { gap:42px; }
+.project-card-dark { min-height:430px; }
+.project-image { cursor:default; }
+.project-image > span {
+  left:22px; right:auto; bottom:20px; width:max-content;
+  border-color:rgba(92,163,178,.25); color:#8eb5bd;
+}
+.project-info h2 { max-width:520px; }
+@media (max-width:980px) {
+  .landing-section.inner-page { padding:88px 0 100px; }
+}
+@media (max-width:640px) {
+  html { scroll-padding-top:68px; }
+  .landing-main { padding-top:68px; }
+  .landing-section { scroll-margin-top:68px; }
+  .landing-section.inner-page { padding:72px 0 82px; }
+  #home.hero-page { min-height:calc(100svh - 68px); }
+  .project-card-dark { min-height:0; }
+}
