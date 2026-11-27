@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight, BarChart3, Database, FileSpreadsheet, Github, 
 import { profile, skills, timeline, projects, type Project } from './data/content';
 import { translations, type Language } from './data/translations';
 
-const pages = ['home', 'about', 'experience', 'skills', 'process', 'projects', 'contact'] as const;
+const pages = ['home', 'about', 'experience', 'skills', 'projects', 'contact'] as const;
 type Page = typeof pages[number];
 
 const pageNames: Record<Page, { en: string; ar: string }> = {
@@ -11,7 +11,6 @@ const pageNames: Record<Page, { en: string; ar: string }> = {
   about: { en: 'About', ar: 'نبذة' },
   experience: { en: 'Experience', ar: 'الخبرات' },
   skills: { en: 'Skills', ar: 'المهارات' },
-  process: { en: 'How I Work', ar: 'طريقة عملي' },
   projects: { en: 'Projects', ar: 'المشاريع' },
   contact: { en: 'Contact', ar: 'تواصل' },
 };
@@ -145,7 +144,6 @@ export default function App() {
         {route.page === 'about' && <AboutPage arabic={arabic} t={t} />}
         {route.page === 'experience' && <ExperiencePage arabic={arabic} t={t} />}
         {route.page === 'skills' && <SkillsPage arabic={arabic} t={t} />}
-        {route.page === 'process' && <ProcessPage arabic={arabic} t={t} />}
         {route.page === 'projects' && !activeProject && <ProjectsPage arabic={arabic} t={t} projects={localizedProjects} go={go} />}
         {route.page === 'projects' && activeProject && <ProjectDetailPage arabic={arabic} project={activeProject} go={go} />}
         {route.page === 'contact' && <ContactPage arabic={arabic} t={t} />}
